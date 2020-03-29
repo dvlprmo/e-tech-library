@@ -20,7 +20,7 @@ router.get("/auth/signup", (request, response) => {
       .save()
       .then(() => {
         passport.authenticate("local", {
-          successRedirect: "/bookpage", //after login success
+          successRedirect: "/landingpage", //after login success
           successFlash: "You have logged In!"
         })(request, response);
       })
@@ -53,7 +53,7 @@ router.get("/auth/signup", (request, response) => {
   router.post(
     "/auth/signin",
     passport.authenticate("local", {
-      successRedirect: "/dashboard", //after login success
+      successRedirect: "/landingpage", //after login success
       failureRedirect: "/auth/signin", //if fail
       failureFlash: "Invalid Username or Password",
       successFlash: "You have logged In!"

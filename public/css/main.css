@@ -40,10 +40,11 @@ button:hover {
 }
 
 .customNav {
-  width: 100%;
-  background-color: #343a40;
-  color: white;
-  height: 30px;
+    width: 100%;
+    background-color: #343a40;
+    color: white;
+    height: 30px;
+    padding: 2px;
 }
 
 .fa-heart {

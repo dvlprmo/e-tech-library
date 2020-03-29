@@ -18,7 +18,7 @@
           <div class="welcomeUser">
             Hello, 
            <% if(currentUser) {%>
-             <% user.name %>
+             <%= currentUser.firstname %>
             <%} %>
             <% if(!currentUser) {%>
             <a href="/auth/signin">Signin</a> |
@@ -26,11 +26,11 @@
             <%} %>
           </div>
           <div class="optionContainer">
-           <% if(currentUser) {%>
+            <% if(currentUser) {%>
+              <i class="fa fa-heart"></i>
+              <i class="fa fa-check"></i>
               <a href="/auth/logout">Logout</a>
-            <%} %> 
-            <i class="fa fa-heart"></i>
-            <i class="fa fa-check"></i>
+            <%} %>
           </div>     
         </nav>
 
@@ -44,7 +44,7 @@
             <div class="collapse navbar-collapse" id="navbarNavDropdown">
               <ul class="navbar-nav">
                 <li class="nav-item active">
-                  <a class="nav-link" href="#">HOME <span class="sr-only">(current)</span></a>
+                  <a class="nav-link" href="/landingpage">HOME</a>
                 </li>
                 <li class="nav-item">
                   <a class="nav-link" href="#">BOOKS</a>
@@ -75,6 +75,9 @@
       
     <%- body %>
 
+    <footer>
+       <p>&copy; Made with <span style="color: #ed553b;">&hearts;</span> by Omega Team.</p>
+    </footer>
     <script src="js/jQuery.js"></script>
     <script src="/js/bootstrap.min.js"></script>
   </body>

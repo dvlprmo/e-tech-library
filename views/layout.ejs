@@ -7,6 +7,36 @@
     <title>Omega E-Library</title>
   </head>
   <body>
+    <% if(alerts.success){ %> <% alerts.success.forEach(function(msg){ %>
+      <div class="alert alert-success">
+        <%= msg %>
+      </div>
+      <% }); %> <% } %> <% if(alerts.error){ %> <%
+      alerts.error.forEach(function(msg){ %>
+      <div class="alert alert-danger">
+        <%= msg %>
+      </div>
+      <% }); %> <% } %> <% if(alerts.autherror){ %> <%
+      alerts.autherror.forEach(function(msg){ %>
+      <div class="alert alert-danger">
+        Your <%= msg.param %> has <%= msg.msg %>
+      </div>
+      <% }); %> <% } %>
+      <div class="navigation">
+        <a href="/home">Seniors</a>
+        <div>
+          <% if(currentUser) {%> <% if(currentUser.isSenior) {%>
+          <a href="/s/create">Create List</a>
+          <%} %> <% if(currentUser.isHelper) {%>
+          <a href="/h/profile">Profile</a>
+          <%} %>
+          <a href="/auth/logout">Logout</a>
+          <%} %> <% if(!currentUser) {%>
+          <a href="/auth/signin">Signin</a>
+          <a href="/auth/signup">Signup</a>
+          <%} %>
+        </div>
+      </div>
     <%- body %>
   </body>
 </html>

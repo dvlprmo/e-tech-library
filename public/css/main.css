@@ -45,6 +45,7 @@ button:hover {
     background-color: #343a40;
     color: white;
     height: 30px;
+    padding: 2px;
 }
 
 .fa-heart {

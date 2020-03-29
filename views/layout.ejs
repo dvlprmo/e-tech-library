@@ -17,9 +17,19 @@
         <!-- User Option Bar -->
         <nav class="customNav">
           <div class="welcomeUser">
-            Hello, signin
+            Hello, 
+           <% if(currentUser) {%>
+             <% user.name %>
+            <%} %>
+            <% if(!currentUser) {%>
+            <a href="/auth/signin">Signin</a> |
+            <a href="/auth/signup">Signup</a>
+            <%} %>
           </div>
           <div class="optionContainer">
+           <% if(currentUser) {%>
+              <a href="/auth/logout">Logout</a>
+            <%} %> 
             <i class="fa fa-heart"></i>
             <i class="fa fa-check"></i>
           </div>     
@@ -48,6 +58,22 @@
           </nav>
     </header>
 
+    <!-- <% if(alerts.success){ %> <% alerts.success.forEach(function(msg){ %>
+      <div class="alert alert-success">
+        <%= msg %>
+      </div>
+      <% }); %> <% } %> <% if(alerts.error){ %> <%
+      alerts.error.forEach(function(msg){ %>
+      <div class="alert alert-danger">
+        <%= msg %>
+      </div>
+      <% }); %> <% } %> <% if(alerts.autherror){ %> <%
+      alerts.autherror.forEach(function(msg){ %>
+      <div class="alert alert-danger">
+        Your <%= msg.param %> has <%= msg.msg %>
+      </div>
+      <% }); %> <% } %> -->
+      
     <%- body %>
 
     <script src="js/jQuery.js"></script>

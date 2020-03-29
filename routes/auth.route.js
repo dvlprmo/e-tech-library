@@ -11,7 +11,7 @@ router.get("/auth/signup", (request, response) => {
   
   router.post("/auth/signup", (request, response) => {
     let user = new User(request.body);
-    
+
     user
       .save()
       .then(() => {
@@ -62,7 +62,5 @@ router.get("/auth/signup", (request, response) => {
     request.flash("success", "Dont leave please come back!");
     response.redirect("/auth/signin");
   });
-
-
 
 module.exports = router;

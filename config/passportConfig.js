@@ -43,11 +43,11 @@ passport.deserializeUser(function(id, done) {
 passport.use(
   new LocalStrategy(
     {
-      usernameField: "eamil_address",
+      usernameField: "email",
       passwordField: "password"
     },
-    function(eamil_address, password, done) {
-      User.findOne({ eamil_address: eamil_address }, function(err, user) {
+    function(email, password, done) {
+      User.findOne({ email: email }, function(err, user) {
         if (err) return done(err);
 
         // If no user is found // TODO. remove flash message for now

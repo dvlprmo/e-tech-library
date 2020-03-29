@@ -46,8 +46,8 @@ passport.use(
       usernameField: "eamil_address",
       passwordField: "password"
     },
-    function(phone, password, done) {
-      User.findOne({ phone: phone }, function(err, user) {
+    function(eamil_address, password, done) {
+      User.findOne({ eamil_address: eamil_address }, function(err, user) {
         if (err) return done(err);
 
         // If no user is found // TODO. remove flash message for now

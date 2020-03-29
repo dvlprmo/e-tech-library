@@ -3,10 +3,54 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="stylesheet" href="/css/main.css" />
+    <link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet"
+      integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
+    <link rel="stylesheet" href="/css/bootstrap.min.css" />
+    <link href="https://fonts.googleapis.com/css?family=Nunito|Open+Sans|PT+Sans&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/css/main.css">
     <title>Omega E-Library</title>
   </head>
   <body>
+   
+    <header>
+
+        <!-- User Option Bar -->
+        <nav class="customNav">
+          <div class="welcomeUser">
+            Hello, signin
+          </div>
+          <div class="optionContainer">
+            <i class="fa fa-heart"></i>
+            <i class="fa fa-check"></i>
+          </div>     
+        </nav>
+
+         <!-- Website Title -->
+          <div class="headerTitle"> 
+              Omega E-library
+          </div>
+        
+          <!-- Navigation -->
+          <nav class="navbar navbar-expand-lg navbar-dark bg-dark mb-4">
+            <div class="collapse navbar-collapse" id="navbarNavDropdown">
+              <ul class="navbar-nav">
+                <li class="nav-item active">
+                  <a class="nav-link" href="#">HOME <span class="sr-only">(current)</span></a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" href="#">BOOKS</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" href="#">ABOUT US</a>
+                </li>
+              </ul>
+            </div>
+          </nav>
+    </header>
+
     <%- body %>
+
+    <script src="js/jQuery.js"></script>
+    <script src="/js/bootstrap.min.js"></script>
   </body>
 </html>

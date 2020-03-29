@@ -5,6 +5,10 @@ const User = require("../models/user.model");
 const List = require("../models/list.model");
 const Book = require("../models/book.model")
 
+router.get("/landingpage", (request, response) => {
+    response.render("landingpage")
+})
+
 router.get("/auth/signup", (request, response) => {
     response.render("auth/signup");
   });

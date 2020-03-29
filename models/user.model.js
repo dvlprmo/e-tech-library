@@ -14,15 +14,13 @@ var userSchema = new mongoose.Schema({
         type: String,
         required: true
     },
-    phone: {
-        type: String,
-        required: true
-    },
     password: {
         type: String,
         required: true
-    }
-});
+    },
+},
+    { timestamps: true }
+);
 
 userSchema.pre("save", function(next) {
     var user = this;

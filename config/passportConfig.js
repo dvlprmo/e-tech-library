@@ -56,6 +56,8 @@ passport.use(
         // Check if the password is correct
         if (!user.validPassword(password)) return done(null, false);
 
+        //
+
         return done(null, user);
       });
     }

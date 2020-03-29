@@ -18,7 +18,7 @@
           <div class="welcomeUser">
             Hello, 
            <% if(currentUser) {%>
-             <% user.name %>
+             <% currentUser.name %>
             <%} %>
             <% if(!currentUser) {%>
             <a href="/auth/signin">Signin</a> |
@@ -51,6 +51,10 @@
                 </li>
                 <li class="nav-item">
                   <a class="nav-link" href="#">ABOUT US</a>
+                </li>
+                <li class="nav-item">
+                
+                  <a class="nav-link" href="/auth/reset">CHANGE PASSWORD</a>
                 </li>
               </ul>
             </div>

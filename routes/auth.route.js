@@ -10,8 +10,35 @@ router.get("/landingpage", (request, response) => {
 })
 
 router.get("/auth/signup", (request, response) => {
-    response.render("auth/signup");
+  response.render("auth/signup");
+});
+
+
+
+
+// change password and user must be signed in to do
+router.get('/auth/change', (req, res) => {
+  let password = req.body.password;
+  let password2 = req.body.password2;
+  xyz = req.body.xyz;
+  
+  User.findOne({password: req.body.password2}, function(err, user){
+   if(err)return handleErr(err);
+   user.password = req.body.password2;
+   user.save(function(err){
+      if(err)return handleErr(err);
+      //user has been updated
+    });
   });
+          //usr.password = password;
+          usr.save(function(err, data) {
+              if (err)
+                  throw err;
+              return res.json({ success: true, data: 'password changed successfully' });
+          })
+
+      })
+  
   
   router.post("/auth/signup", (request, response) => {
     let user = new User(request.body);
@@ -66,5 +93,19 @@ router.get("/auth/signup", (request, response) => {
     request.flash("success", "Dont leave please come back!");
     response.redirect("/auth/signin");
   });
+
+  // render the reset page
+  router.get("/auth/reset", (request, response) => {
+    response.render("auth/reset")
+  })
+
+  // redirect user to login page if it is not login in
+router.use((request, response, next) => {
+  if(request.session.user == null){
+    response.render("auth/signin")
+  }else{
+    next()
+  }
+});
 
 module.exports = router;

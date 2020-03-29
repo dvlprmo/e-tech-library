@@ -1,11 +1,18 @@
-<form action="/auth/signin" method="POST">
-    <div>
-        <label>Email</label>
-        <input type="text" name="email">
-    </div>
-    <div>
-        <label>Password</label>
-        <input type="password" name="password">
-    </div>
-    <button>Sign-in</button>
-</form>
+
+<div class="container">
+    <form action="/auth/signin" method="POST">
+        <div class="row">
+            <div class="col-12">
+                <label>Email</label>
+                <input type="text" class="form-input" name="email" />
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-12">
+                <label>Password</label>
+                <input type="password" class="form-input" name="password" />
+            </div>
+        </div>
+        <button class="btn btn-primary">Sign in</button>
+    </form>
+</div>

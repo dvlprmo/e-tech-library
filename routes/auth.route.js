@@ -3,8 +3,10 @@ const passport = require("../config/passportConfig");
 const isLoggedIn = require("../config/loginBlocker");
 const moment = require("moment");
 const User = require("../models/user.model");
-const List = require("../models/category.model");
-const Book = require("../models/book.model")
+const Category = require("../models/category.model");
+const Book = require("../models/book.model");
+var formidable = require('formidable');
+var fs = require('fs');
 
 router.get("/landingpage", (request, response) => {
     response.render("landingpage")
@@ -140,5 +142,69 @@ router.post('/auth/change', (req, res) => {
   router.get("/homepage/favorite", (request, response) => {
     response.render("homepage/favorite")
   })
+
+
+router.get("/category", (request, response) => {
+  response.render("adminPages/addCategory");
+});
+
+router.post("/addcategory", (request, response) => {
+
+  let category = new Category(request.body);
+  category
+    .save()
+    .then(() => {
+      response.redirect("/category");
+      })
+    .catch(err => {
+      console.log(err);
+      response.send("There's an error with adding the category.");
+    });
+        }
+);
+
+router.get("/addbook", (request, response) => {
+
+  Category.find()
+      .then(categories => {
+        response.render("adminPages/addbook", { categories })
+      })
+      .catch(err => {
+        console.log(err);
+      });
+});
+
+router.post("/addbook", (request, response) => {
+  var form = new formidable.IncomingForm();
+  form.parse(request, function (err, fields, files) {
+    var oldPath = files.filetoupload.path;
+    var imagePath = '/dbimg/' + files.filetoupload.name; //display image in our index.ejs file
+    var uploadPath = './public/dbimg/' + files.filetoupload.name;
+
+    fs.rename(oldPath, uploadPath, function (err) {
+      if (err) throw err;
+      else {
+        fields.image = imagePath;
+        let book = new Book(fields);
+        book
+          .save()
+          .then(() => {
+            let category = fields.category;
+            Category.findById(category, (err, category) => {
+              category.book.push(book);
+              category.save();
+              });
+              // I SHOULD ADD THE USER TOO
+            response.redirect("/addbook");
+          })
+          .catch(err => {
+            console.log(err);
+            response.send("There's an error with adding the book.")
+          })
+      }
+    });
+  });
+});
+
 
 module.exports = router;

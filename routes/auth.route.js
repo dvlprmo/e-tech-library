@@ -17,6 +17,13 @@ router.get("/auth/signup", (request, response) => {
 });
 
 
+router.get("/auth/aboutus", (request, response) => {
+  response.render("auth/aboutus");
+});
+
+
+
+
 
 
 // change password and user must be signed in to do

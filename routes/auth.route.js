@@ -1,6 +1,7 @@
 const router = require("express").Router();
 const passport = require("../config/passportConfig");
 const isLoggedIn = require("../config/loginBlocker");
+const moment = require("moment");
 const User = require("../models/user.model");
 const List = require("../models/category.model");
 const Book = require("../models/book.model")
@@ -81,22 +82,7 @@ router.post('/auth/change', (req, res) => {
   router.get("/auth/signin", (request, response) => {
     response.render("auth/signin");
   });
-  
-//   router.get("/dashboard", isLoggedIn, (request, response) => {
-//     if (request.user.isSenior) {
-//       //get current users list only
-//       User.findById(request.user._id, "list")
-//         .populate("list")
-//         .then(user => {
-//           let lists = user.list; //populated list in user model
-//           response.render("dashboard/index", { lists });
-//         });
-//     } else if (request.user.isHelper) {
-//       List.find({ status: "free" }).then(lists => {
-//         response.render("dashboard/index", { lists });
-//       });
-//     }
-//   });
+
   
   //-- Login Route
   router.post(
@@ -121,10 +107,38 @@ router.post('/auth/change', (req, res) => {
     response.render("auth/reset")
   })
 
+  // home page route which it will have all books avaliable
+  router.get("/homepage/index", (request, response) => {
+
+    Book.find()
+    .then(books => {
+        response.render("homepage/index", { books, moment })
+    })
+    .catch(err => {
+        console.log(err);
+    });
+  })
   // homepage route which it will redirect to more information about the book page
-  router.get("/dashboard/moreInfo", (request, response) => {
-    response.render("homepage/information")
+  router.get("/index/moreinformation", (request, response) => {
+    Book.find()
+    .then(books => {
+        response.render("homepage/information", { books, moment })
+    })
+    .catch(err => {
+        console.log(err);
+    });
   })
 
+  // directing me to another page called readlist page which means 
+  // the user already read that book
+  router.get("/homepage/readlist", (request, response) => {
+    response.render("homepage/readlist")
+  })
+
+  // directing me to another page called favorite which means 
+  // the user add this book to his favorite books list
+  router.get("/homepage/favorite", (request, response) => {
+    response.render("homepage/favorite")
+  })
 
 module.exports = router;

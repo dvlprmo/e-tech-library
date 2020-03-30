@@ -1,1 +1,33 @@
-<h1> You are here </h1>
+<form action="/index/moreinformation" method="POST">
+<div class="card" style="width: 18rem;">
+    <% if(books.length) {%>
+    <% books.forEach(item =>{ %>
+    <img class="card-img-top" src="<%= item.image%>" alt="Card image cap">
+    <div class="card-body">
+      <h4 class="card-text"> <%= item.title%> </h4>
+      <h4 class="card-text"> ADDED ON: <%= moment(item.createdAt).fromNow()%></h4>
+      <h4 class="card-text"> PUBLISHER: <%= item.publisher%></h4>
+      <h4 class="card-text"> ISBN: <%= item.ISBN%></h4>
+      <h4 class="card-text"> PAGE NUMBERS: <%= item.numberOfPage%></h4>
+      <h4 class="card-text"> PUBLISHER: <%= item.link%></h4>
+    </div>  
+
+    <form action="/homepage/readlist" method="POST">
+        <a  href="./homepage/readlist" type="submit" name="readlist" class="btn btn-info signBut1" role="button" value="readlist">ALREADY READ? </a>
+    </form>
+    <form action="/homepage/favorite" method="POST">
+                <a  href="./homepage/favorite" type="submit" name="favorite" class="btn btn-info signBut1" role="button" value="moreInfo">ADD TO FAVORITE LIST </a>
+            </form>
+
+    <% }) %>
+
+    <% }else{ %>
+        <div class="alert alert-danger empty">
+            EMPTY!
+        </div>
+        <% }%>
+    </div>
+  </div>
+</form>
+
+  

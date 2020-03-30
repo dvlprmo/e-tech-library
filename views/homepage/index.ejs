@@ -1,3 +1,4 @@
+<form action="/homepage/index" method="POST">
 <div class="container">
     <div class="row">
         <% if(books.length) {%>
@@ -22,10 +23,10 @@
       <% }) %>
       <% }else{ %>
   
-      <div class="alert alert-danger">
+      <div class="alert alert-danger empty">
           NO BOOKS TO SHOW!
       </div>
       <% }%>
     </div>
   </div>
-  
+</form>

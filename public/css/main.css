@@ -16,6 +16,20 @@ body {
 .container{
   padding-top: 50px;
 }
+
+/*
+adding a small thing in here of styling the text of no books 
+*/
+.empty{
+  margin-left: 180px;
+  margin-bottom: 40px;
+}
+.card{
+  margin-left: 470px;
+  margin-top: 90px;
+  margin-bottom: 90px;
+ 
+}
 /* starting landing page form  */
 
 .homepage{

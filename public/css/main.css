@@ -13,7 +13,9 @@ body {
   margin: 0;
   font-family: 'PT Sans', sans-serif !important;
 }
-
+.container{
+  padding-top: 50px;
+}
 /* starting landing page form  */
 
 .homepage{

@@ -17,27 +17,52 @@ router.get("/auth/signup", (request, response) => {
 
 
 // change password and user must be signed in to do
-router.get('/auth/change', (req, res) => {
-  let password = req.body.password;
-  let password2 = req.body.password2;
-  xyz = req.body.xyz;
-  
-  User.findOne({password: req.body.password2}, function(err, user){
-   if(err)return handleErr(err);
-   user.password = req.body.password2;
-   user.save(function(err){
-      if(err)return handleErr(err);
-      //user has been updated
-    });
-  });
-          //usr.password = password;
-          usr.save(function(err, data) {
-              if (err)
-                  throw err;
-              return res.json({ success: true, data: 'password changed successfully' });
-          })
+router.post('/auth/change', (req, res) => {
+  const {password, password2 } = req.body;
+  let errors = [];
 
-      })
+  //check required fields
+  if (!password || !password2) {
+    errors.push({ msg: 'Please fill in all fields' });
+  }
+
+  //check passwords match
+  if (password !== password2) {
+    errors.push({ msg: 'Passwords do not match' });
+  }
+
+  //check pass length
+  if (password.length < 6) {
+    errors.push({ msg: 'Password should be at least 6 characters' });
+  }
+
+  if (errors.length > 0) {
+    res.render('update', {
+      errors,
+      password,
+      password2
+    })
+  }else {
+    //validation passed
+    User.updateOne({ password: password })
+      .then(user => {
+        if (user) {
+          //user exists
+         
+          res.render('update', {
+            password,
+            password2
+          });
+        } else {
+          const updateUser = new User({
+            password
+          });
+
+
+        
+
+      }})}
+    })      
   
   
   router.post("/auth/signup", (request, response) => {

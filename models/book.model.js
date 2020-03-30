@@ -1,12 +1,21 @@
 const mongoose = require("mongoose");
 const bookSchema = mongoose.Schema(
   {
-    title: {type: String,  
-            required: true
+    title: {
+      type: String,  
+      required: true
     },
-    description: { type: String, 
-                    required: true
-
+    author: {
+      type: String,
+      required: true
+    },
+    image: {
+      type: String,
+      required: true
+    },
+    description: { 
+       type: String, 
+       required: true
     },
     publisher: {type: String,  
                 required: true
@@ -23,6 +32,10 @@ const bookSchema = mongoose.Schema(
     user: [{
       type: mongoose.Schema.Types.ObjectId,
       ref: 'User'
+    }],
+    category: [{
+      type: mongoose.Schema.Types.ObjectId,
+      ref: 'Category'
     }]
   },
   { timestamps: true } //means createdAt and updatedAt

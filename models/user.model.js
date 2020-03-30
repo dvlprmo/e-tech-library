@@ -22,6 +22,17 @@ var userSchema = new mongoose.Schema({
         type: Boolean,
         default: false,
     },
+    finishReading: [
+        {
+            type: mongoose.Schema.Types.ObjectId,
+            ref: "Book"
+        }],
+    favoriteBooks: [
+        {
+            type: mongoose.Schema.Types.ObjectId,
+            ref: "Book"
+        }
+    ]
 },
     { timestamps: true }
 );

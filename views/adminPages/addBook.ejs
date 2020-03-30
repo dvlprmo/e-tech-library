@@ -1,12 +1,11 @@
 <div class="card signup">
-    <img src="/imgs/bg6.jpg" class="card-img-top signup-img" alt="computer">
+    <img src="/imgs/bg7.jpg" class="card-img-top signup-img" alt="computer">
     <div class="card-body">
         <h5 class="card-title">ADD BOOK</h5>
-        <p class="card-text">You are step closer to your favorite books.
-            We are glad you'll be part of our family &hearts; </p>
+        <p class="card-text">BIG BOSS your about to add book and help many people &hearts; </p>
         <br>
         <!-- Add Book form -->
-        <form action="/auth/signup" method="POST">
+        <form action="/addbook" method="POST" enctype="multipart/form-data">
             <div class="row mb-3">
                 <div class="col-12">
                     <label>Book Title<span class="required">*</span></label>
@@ -47,6 +46,25 @@
                     <input name="numberOfPage" type="text" class="form-input" placeholder="Number of Pages" />
                 </div>
             </div>
+            <br>
+            <div class="row mb-3">
+                <div class="col-12">
+                    <label>Book Cover <span class="required">*</span></label>
+                    <input type="file" id="image" name="filetoupload">
+                </div>
+            </div>
+            <br>
+            <div class="row mb-3">
+                <div class="col-12">
+                    <label> Category </label>
+                    <select name="category">
+                        <% categories.forEach(function(category) { %>
+                        <option name="category" value="<%= category._id %>" > <%= category.name %> </option>
+                        <% }) %>
+                    </select>
+                </div>
+            </div>
+            <br>
             <button class="btn btn-primary">Add Book</button>
         </form>
     </div>

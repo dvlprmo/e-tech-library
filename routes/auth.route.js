@@ -128,14 +128,15 @@ router.post('/auth/change', (req, res) => {
     });
   })
   // homepage route which it will redirect to more information about the book page
-  router.get("/index/moreinformation", (request, response) => {
-    Book.find()
-    .then(books => {
-        response.render("homepage/information", { books, moment })
+  router.get("/homepage/information/:id", (request, response) => {
+    Book.findById(request.params.id)
+    .then(book => {
+        response.render("homepage/information", { book, moment })
     })
     .catch(err => {
         console.log(err);
     });
+
   })
 
   // directing me to another page called readlist page which means 

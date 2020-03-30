@@ -1,32 +1,24 @@
-<form action="/homepage/index" method="POST">
-<div class="container">
-    <div class="row">
-        <% if(books.length) {%>
-      
+
+
+<div class="containerABC">
+    
       <% books.forEach(book =>{ %>
       <div class="col-4">
         <div class="box">
           <div class="box-body">
-            <h6 class="box-subtitle mb-2 text-muted"><%= book.title %></h6>
+            <h6 class="col-sm box-subtitle mb-2 text-muted"><%= book.title %></h6>
             <p class="box-text">
-              <% book.items.forEach(item =>{ %>
-              <img src="<%= item.image%>" alt="BookImage" style="width: 90px; height: 90px;"/></div>
-              
-              <% }) %>
+              <img src="<%= book.image%>" alt="BookImage" style="width: 90px; height: 90px;"/></div>
             </p>
-            <form action="/dashboard/moreInfo" method="POST">
-                <a  href="./homepage/information" type="submit" name="moreInfo" class="btn btn-info signBut1" role="button" value="moreInfo">MORE INFORMATION ... </a>
-            </form>
+            
+              <div class="moreInfo">
+                <a  href="/homepage/information/<%= book._id %>" type="submit" name="moreInfo" class="btn btn-info signBut1" role="button" value="moreInfo">MORE INFORMATION ... </a>
+              </div>
+                
+            
           </div>
         </div>
-      </div>
+      
       <% }) %>
-      <% }else{ %>
-  
-      <div class="alert alert-danger empty">
-          NO BOOKS TO SHOW!
-      </div>
-      <% }%>
     </div>
-  </div>
-</form>
+ 

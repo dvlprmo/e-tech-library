@@ -58,9 +58,6 @@ router.post('/auth/change', (req, res) => {
             password
           });
 
-
-        
-
       }})}
     })      
   
@@ -122,6 +119,11 @@ router.post('/auth/change', (req, res) => {
   // render the reset page
   router.get("/auth/reset", (request, response) => {
     response.render("auth/reset")
+  })
+
+  // homepage route which it will redirect to more information about the book page
+  router.get("/dashboard/moreInfo", (request, response) => {
+    response.render("homepage/information")
   })
 
 

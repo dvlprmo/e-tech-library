@@ -2,7 +2,7 @@ const router = require("express").Router();
 const passport = require("../config/passportConfig");
 const isLoggedIn = require("../config/loginBlocker");
 const User = require("../models/user.model");
-const List = require("../models/list.model");
+const List = require("../models/category.model");
 const Book = require("../models/book.model")
 
 router.get("/landingpage", (request, response) => {
@@ -124,13 +124,5 @@ router.post('/auth/change', (req, res) => {
     response.render("auth/reset")
   })
 
-  // redirect user to login page if it is not login in
-router.use((request, response, next) => {
-  if(request.session.user == null){
-    response.render("auth/signin")
-  }else{
-    next()
-  }
-});
 
 module.exports = router;

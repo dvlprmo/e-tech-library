@@ -124,13 +124,5 @@ router.post('/auth/change', (req, res) => {
     response.render("auth/reset")
   })
 
-  // redirect user to login page if it is not login in
-router.use((request, response, next) => {
-  if(request.session.user == null){
-    response.render("auth/signin")
-  }else{
-    next()
-  }
-});
 
 module.exports = router;

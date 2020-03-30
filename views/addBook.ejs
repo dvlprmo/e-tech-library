@@ -1,0 +1,54 @@
+<div class="card signup">
+    <img src="/imgs/bg6.jpg" class="card-img-top signup-img" alt="computer">
+    <div class="card-body">
+        <h5 class="card-title">ADD BOOK</h5>
+        <p class="card-text">You are step closer to your favorite books.
+            We are glad you'll be part of our family &hearts; </p>
+        <br>
+        <!-- Add Book form -->
+        <form action="/auth/signup" method="POST">
+            <div class="row mb-3">
+                <div class="col-12">
+                    <label>Book Title<span class="required">*</span></label>
+                    <input name="title" class="form-input" placeholder="Title" />
+                </div>
+            </div>
+            <div class="row mb-3">
+                <div class="col-12">
+                    <label>Book Author<span class="required">*</span></label>
+                    <input name="author" class="form-input" placeholder="Author Name" />
+                </div>
+            </div>
+            <div class="row mb-3">
+                <div class="col-12">
+                    <label>Book Description <span class="required">*</span></label>
+                    <input name="description" class="form-input" placeholder="Write Book Description" rows="4" cols="50" />
+                </div>
+            </div>
+            <div class="row mb-3">
+                <div class="col-12">
+                    <label>Book Publisher <span class="required">*</span></label>
+                    <input name="publisher" class="form-input" placeholder="Publisher Information" rows="4" cols="50"/>
+                </div>
+            </div>
+            <div class="row mb-3">
+                <div class="col-12">
+                    <label>Book Link <span class="required">*</span></label>
+                    <input name="link" type="text" class="form-input" placeholder="URL Link" />
+                </div>
+            </div>
+            <div class="row mb-3">
+                <div class="col-6">
+                    <label>ISBN <span class="required">*</span></label>
+                    <input name="ISBN" type="text" class="form-input" placeholder="Book ISBN" />
+                </div>
+                <div class="col-6">
+                    <label>Number of Pages <span class="required">*</span></label>
+                    <input name="numberOfPage" type="text" class="form-input" placeholder="Number of Pages" />
+                </div>
+            </div>
+            <button class="btn btn-primary">Add Book</button>
+        </form>
+    </div>
+
+</div>

@@ -1,23 +1,28 @@
 
-<div class="container">
-   <div class="col-12 mx-auto">
-        <form action="/auth/signin" method="POST">
-            <div class="row">
-                <div class="col-12">
-                    <label>Email</label>
-                    <input type="text" class="form-control" name="email" />
+<div class="card signin">
+    <img src="/imgs/bg2.jpg" class="card-img-top" alt="computer">
+    <div class="card-body">
+        <h5 class="card-title">SIGN IN</h5>
+        <p class="card-text">Hey, we missed you and welcome back &hearts; </p>
+        <!-- sign in form -->
+        <div class="col-12 mx-auto">
+            <form action="/auth/signin" method="POST">
+                <div class="row">
+                    <div class="col-12">
+                        <label>Email</label>
+                        <input type="text" class="form-control" name="email" />
+                    </div>
                 </div>
-            </div>
-            <br>
-            <div class="row">
-                <div class="col-12">
-                    <label>Password</label>
-                    <input type="password" class="form-control" name="password" />
+                <br>
+                <div class="row">
+                    <div class="col-12">
+                        <label>Password</label>
+                        <input type="password" class="form-control" name="password" />
+                    </div>
                 </div>
-            </div>
-            <br>
-            <button class="btn btn-primary">Sign in</button>
-          
-        </form>
-   </div>
+                <br>
+                <button class="btn btn-primary">Sign in</button>
+            </form>
+        </div>
+    </div>
 </div>

@@ -1,27 +1,36 @@
-
-<div class="container">
-    <form action="/auth/signup" method="POST">
-        <div class="row mb-3">
-            <div class="col-6">
-                <label>First Name</label>
-                <input name="firstname" class="form-input"/>
+<div class="card signup">
+    <img src="/imgs/bg6.jpg" class="card-img-top signup-img" alt="computer">
+    <div class="card-body">
+        <h5 class="card-title">SIGN UP</h5>
+        <p class="card-text">You are step closer to your favorite books. 
+            We are glad you'll be part of our family &hearts; </p>
+            <br>
+        <!-- sign up form -->
+        <form action="/auth/signup" method="POST">
+            <div class="row mb-3">
+                <div class="col-6">
+                    <label>First Name <span class="required">*</span></label>
+                    <input name="firstname" class="form-input" placeholder="Your First Name"/>
+                </div>
+                <div class="col-6">
+                    <label>Last Name <span class="required">*</span></label>
+                    <input name="lastname" class="form-input" placeholder="Your Last Name"/>
+                </div>
             </div>
-            <div class="col-6">
-                <label>Last Name</label>
-                <input name="lastname" class="form-input"/>
+            <div class="row mb-3">
+                <div class="col-6">
+                    <label>Email <span class="required">*</span></label>
+                    <input name="email" class="form-input" placeholder="example@example.com"/>
+                </div>
+                <div class="col-6">
+                    <label>Password <span class="required">*</span></label>
+                    <input name="password" type="password" class="form-input" placeholder="Your Password"/>
+                </div>
             </div>
-        </div>
-        <div class="row mb-3">
-            <div class="col-6">
-                <label>Email</label>
-                <input name="email" class="form-input" />
-            </div>
-            <div class="col-6">
-                <label>Password</label>
-                <input name="password" type="password" class="form-input"/>
-            </div>
-        </div>
-        <button class="btn btn-primary">Signup</button>
-    </form>
+            <button class="btn btn-primary">Signup</button>
+        </form>
 </div>
+
+</div>
+
 

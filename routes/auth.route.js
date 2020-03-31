@@ -8,6 +8,7 @@ const Book = require("../models/book.model");
 var formidable = require('formidable');
 const methodOverride = require("method-override");
 var fs = require('fs');
+const bcrypt = require("bcrypt");
 
 router.use(methodOverride("_method"));
 
@@ -112,30 +113,14 @@ router.post("/auth/signup", (request, response) => {
 */
   // directing me to another page called favorite which means 
   // the user add this book to his favorite books list
-<<<<<<< HEAD
-  router.get("/homepage/bookfav/:id", (request, response) => {
-    console.log("user" + request.user._id);
-    console.log("book" + request.params.id);
-    User.findByIdAndUpdate(request.user._id, { $push: { favoriteBooks: request.params.id}})
-||||||| b00ed82
-  router.get("/homepage/bookfav/:id", (request, response) => {
-    
-    User.findByIdAndUpdate(request.user._id, {$push: {favoriteBooks: request.params.id}})
-=======
 
   /*
   router.get("/homepage/bookfav", (request, response) => {
     
     User.findByIdAndUpdate(request.user._id, {$push: {favoriteBooks: request.params.id}})
->>>>>>> be4ec4bec11b261f7f8f4746d362606bb1450b46
     User.findById(request.user._id, "favoriteBooks").populate("favoriteBooks")
     .then( book => {
-<<<<<<< HEAD
-||||||| b00ed82
-      console.log(book)
-=======
       // console.log(book)
->>>>>>> be4ec4bec11b261f7f8f4746d362606bb1450b46
       let books = book.favoriteBooks
       response.render("homepage/bookfav", { books})
     }).catch(err => {
@@ -207,6 +192,8 @@ router.get("/homepage/bookfav", (request, response) => {
   })
 */
 
+// ======================= Category Page =========================
+
 router.get("/category", (request, response) => {
   Category.find()
     .then(categories => {
@@ -240,14 +227,13 @@ router.delete("/category/:id/delete", (request, response) => {
 });
 
 router.put('/category/:id', (req, res) => {
-  console.log(req.body);
-  console.log(req.params.id);
   Category.findByIdAndUpdate(req.params.id, req.body, (err, updatedModel) => {
-    request.flash("success", "Category updated Successfully");
+    req.flash("success", "Category updated Successfully");
     res.redirect('/category');
   });
 });
 
+// ======================= Add Book Page =========================
 router.get("/addbook", (request, response) => {
 
   Category.find()
@@ -279,7 +265,7 @@ router.post("/addbook", (request, response) => {
               category.book.push(book);
               category.save();
               });
-              // I SHOULD ADD THE USER TOO
+
             request.flash("success", "New Book added Successfully");
             response.redirect("/addbook");
           })
@@ -292,11 +278,25 @@ router.post("/addbook", (request, response) => {
   });
 });
 
-
-// update the password
-router.get("/auth/change", (request, response) => {
-  response.render("auth/change")
-})
+// ======================== Change Password =========================
+router.post("/auth/change", (req, res) => {
+  // check if password and confirm password match
+  if (req.body.password == req.body.confirmPassword){
+    let newPass = req.body.password;
+    // encrypt pass
+    var hashedPass = bcrypt.hashSync(newPass, 10);
+    // find the user and update password
+    User.findByIdAndUpdate(req.user._id, {password: hashedPass}, (err, updatedModel) => {
+      req.flash("success", "Password updated Successfully");
+      res.redirect('/landingpage');
+    });
+  }
+  // if passwords do not match
+  else{
+    req.flash("error", "password and confirm password do not match");
+    res.redirect('/auth/reset');
+  }
+});
 
 
 // updating the password 

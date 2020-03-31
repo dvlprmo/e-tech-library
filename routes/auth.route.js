@@ -9,15 +9,11 @@ var formidable = require('formidable');
 const methodOverride = require("method-override");
 var fs = require('fs');
 
-<<<<<<< HEAD
 router.use(methodOverride("_method"));
 
-||||||| 0ec8877
-=======
 
 
 
->>>>>>> aef4561a207d694fc218a47e159d1c32e4b7281c
 router.get("/landingpage", (request, response) => {
     response.render("landingpage")
 })

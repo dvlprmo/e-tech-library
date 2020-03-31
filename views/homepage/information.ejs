@@ -1,5 +1,5 @@
 <div class="boardBox">
-<form action="/index/moreinformation" method="POST">
+
 <div class="newNoneClass" style="width: 18rem;">
     
     <% //books.forEach(book =>{ %>
@@ -20,16 +20,14 @@
     </div>
 
     <div class="buttonReview">
-    
         <a  href="/homepage/readlist/<%= book._id %>" type="submit" name="readlist" class="btn btn-info signBut5" role="button" value="readlist">ALREADY READ? </a>
-   
     
-        <div class="moreInfo">
-            <a  href="/homepage/favorite/<%= book._id %>" type="submit" name="moreInfo" class="btn btn-info signBut1" role="button" value="moreInfo">ADD TO FAVORITE LIST</a>
-          </div>
-        </div>
+      <div class="moreInfo">
+        <a  href="/homepage/bookfav/ <%= book._id %>" type="submit" name="moreInfo" class="btn btn-info signBut1" role="button" value="moreInfo">ADD TO FAVORITE LIST</a>
+      </div>
+    </div>
   </div>
-</form>
+
 </div>
 
   

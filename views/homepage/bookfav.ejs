@@ -1,5 +1,6 @@
 
 <div class="containerABC">
+  <% books.forEach(book => { %>
     <div class="col-4">
       <div class="box">
         <div class="box-body">
@@ -11,11 +12,10 @@
             <a  href="/homepage/information/<%= book._id %>" type="submit" name="moreInfo" class="btn btn-info signBut1" role="button" value="moreInfo">MORE INFORMATION ... </a>
           </div>
   </div>
-  <div class="moreInfo">
-            <a  href="/homepage/index" type="submit" name="moreInfo" class="btn btn-info signBut1" role="button" value="moreInfo">BACK TO BOOKLIST </a>
-          </div>
 
-  
     </div>
+    <% })%>
+   
   </div>
-  
+
+

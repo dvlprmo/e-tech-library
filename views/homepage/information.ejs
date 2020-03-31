@@ -1,0 +1,34 @@
+<div class="boardBox">
+<form action="/index/moreinformation" method="POST">
+<div class="newNoneClass" style="width: 18rem;">
+    
+    <% //books.forEach(book =>{ %>
+        <div class="alone">
+            <img class="imageOm" src="<%= book.image%>" alt="Card image cap">
+
+        </div>
+   
+    <div class="textOM">
+      <h4 class="textNum"> TITLE: <%= book.title%> </h4>
+      <h4 class="textNum"> ADDED ON: <%= moment(book.createdAt).fromNow()%></h4>
+      <h4 class="textNum"> PUBLISHER: <%= book.publisher%></h4>
+      <h4 class="textNum"> ISBN: <%= book.ISBN%></h4>
+      <h4 class="textNum"> PAGE NUMBERS: <%= book.numberOfPage%></h4>
+      <h4 class="textNum"> LINK: <%= book.link%></h4>
+    </div>  
+    <% // }) %>
+    </div>
+
+    <div class="buttonReview">
+    <form action="/homepage/readlist" method="POST">
+        <a  href="./homepage/readlist" type="submit" name="readlist" class="btn btn-info signBut5" role="button" value="readlist">ALREADY READ? </a>
+    </form>
+    <form action="/homepage/favorite" method="POST">
+                <a  href="./homepage/favorite" type="submit" name="favorite" class="btn btn-info signBut5" role="button" value="moreInfo">ADD TO FAVORITE LIST </a>
+            </form>
+        </div>
+  </div>
+</form>
+</div>
+
+  

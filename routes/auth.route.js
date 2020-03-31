@@ -1,9 +1,12 @@
 const router = require("express").Router();
 const passport = require("../config/passportConfig");
 const isLoggedIn = require("../config/loginBlocker");
+const moment = require("moment");
 const User = require("../models/user.model");
-const List = require("../models/list.model");
-const Book = require("../models/book.model")
+const Category = require("../models/category.model");
+const Book = require("../models/book.model");
+var formidable = require('formidable');
+var fs = require('fs');
 
 router.get("/landingpage", (request, response) => {
     response.render("landingpage")
@@ -65,9 +68,6 @@ router.post('/auth/change', (req, res) => {
             password
           });
 
-
-        
-
       }})}
     })      
   
@@ -91,22 +91,7 @@ router.post('/auth/change', (req, res) => {
   router.get("/auth/signin", (request, response) => {
     response.render("auth/signin");
   });
-  
-//   router.get("/dashboard", isLoggedIn, (request, response) => {
-//     if (request.user.isSenior) {
-//       //get current users list only
-//       User.findById(request.user._id, "list")
-//         .populate("list")
-//         .then(user => {
-//           let lists = user.list; //populated list in user model
-//           response.render("dashboard/index", { lists });
-//         });
-//     } else if (request.user.isHelper) {
-//       List.find({ status: "free" }).then(lists => {
-//         response.render("dashboard/index", { lists });
-//       });
-//     }
-//   });
+
   
   //-- Login Route
   router.post(
@@ -131,13 +116,103 @@ router.post('/auth/change', (req, res) => {
     response.render("auth/reset")
   })
 
-  // redirect user to login page if it is not login in
-router.use((request, response, next) => {
-  if(request.session.user == null){
-    response.render("auth/signin")
-  }else{
-    next()
-  }
+  // home page route which it will have all books avaliable
+  router.get("/homepage/index", (request, response) => {
+
+    Book.find()
+    .then(books => {
+        response.render("homepage/index", { books, moment })
+    })
+    .catch(err => {
+        console.log(err);
+    });
+  })
+  // homepage route which it will redirect to more information about the book page
+  router.get("/homepage/information/:id", (request, response) => {
+    Book.findById(request.params.id)
+    .then(book => {
+        response.render("homepage/information", { book, moment })
+    })
+    .catch(err => {
+        console.log(err);
+    });
+
+  })
+
+  // directing me to another page called readlist page which means 
+  // the user already read that book
+  router.get("/homepage/readlist", (request, response) => {
+    response.render("homepage/readlist")
+  })
+
+  // directing me to another page called favorite which means 
+  // the user add this book to his favorite books list
+  router.get("/homepage/favorite", (request, response) => {
+    response.render("homepage/favorite")
+  })
+
+
+router.get("/category", (request, response) => {
+  response.render("adminPages/addCategory");
 });
+
+router.post("/addcategory", (request, response) => {
+
+  let category = new Category(request.body);
+  category
+    .save()
+    .then(() => {
+      response.redirect("/category");
+      })
+    .catch(err => {
+      console.log(err);
+      response.send("There's an error with adding the category.");
+    });
+        }
+);
+
+router.get("/addbook", (request, response) => {
+
+  Category.find()
+      .then(categories => {
+        response.render("adminPages/addbook", { categories })
+      })
+      .catch(err => {
+        console.log(err);
+      });
+});
+
+router.post("/addbook", (request, response) => {
+  var form = new formidable.IncomingForm();
+  form.parse(request, function (err, fields, files) {
+    var oldPath = files.filetoupload.path;
+    var imagePath = '/dbimg/' + files.filetoupload.name; //display image in our index.ejs file
+    var uploadPath = './public/dbimg/' + files.filetoupload.name;
+
+    fs.rename(oldPath, uploadPath, function (err) {
+      if (err) throw err;
+      else {
+        fields.image = imagePath;
+        let book = new Book(fields);
+        book
+          .save()
+          .then(() => {
+            let category = fields.category;
+            Category.findById(category, (err, category) => {
+              category.book.push(book);
+              category.save();
+              });
+              // I SHOULD ADD THE USER TOO
+            response.redirect("/addbook");
+          })
+          .catch(err => {
+            console.log(err);
+            response.send("There's an error with adding the book.")
+          })
+      }
+    });
+  });
+});
+
 
 module.exports = router;

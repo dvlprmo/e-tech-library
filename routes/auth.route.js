@@ -5,7 +5,10 @@ const User = require("../models/user.model");
 const Category = require("../models/category.model");
 const Book = require("../models/book.model");
 var formidable = require('formidable');
+const methodOverride = require("method-override");
 var fs = require('fs');
+
+router.use(methodOverride("_method"));
 
 router.get("/landingpage", (request, response) => {
     response.render("landingpage")
@@ -131,7 +134,13 @@ router.post('/auth/change', (req, res) => {
 // ======================= Admin Pages =========================
 
 router.get("/category", (request, response) => {
-  response.render("adminPages/addCategory");
+  Category.find()
+    .then(categories => {
+      response.render("adminPages/addCategory", { categories })
+    })
+    .catch(err => {
+      console.log(err);
+    });
 });
 
 router.post("/addcategory", (request, response) => {
@@ -140,14 +149,30 @@ router.post("/addcategory", (request, response) => {
   category
     .save()
     .then(() => {
+      request.flash("success", "New Category Added Successfully");
       response.redirect("/category");
       })
     .catch(err => {
-      console.log(err);
       response.send("There's an error with adding the category.");
     });
         }
 );
+
+router.delete("/category/:id/delete", (request, response) => {
+  Category.findByIdAndDelete(request.params.id).then(category => {
+    request.flash("success", "Category Deleted Successfully");
+    response.redirect("/category");
+  });
+});
+
+router.put('/category/:id', (req, res) => {
+  console.log(req.body);
+  console.log(req.params.id);
+  Category.findByIdAndUpdate(req.params.id, req.body, (err, updatedModel) => {
+    request.flash("success", "Category updated Successfully");
+    res.redirect('/category');
+  });
+});
 
 router.get("/addbook", (request, response) => {
 
@@ -181,6 +206,7 @@ router.post("/addbook", (request, response) => {
               category.save();
               });
               // I SHOULD ADD THE USER TOO
+            request.flash("success", "New Book added Successfully");
             response.redirect("/addbook");
           })
           .catch(err => {

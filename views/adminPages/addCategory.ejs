@@ -20,3 +20,16 @@
     </div>
 </div>
 
+<div>
+    <div> Categories </div>
+        <% categories.forEach(function(category) { %>
+            <form method="POST" action="/category/<%= category._id %>?_method=PUT">
+                <input type="text" name="name" value="<%= category.name %>" /><br />
+                <button type="submit">Update</button>
+            </form>
+            <form method="POST" action="/category/<%= category._id %>/delete?_method=DELETE">
+                <button type="submit">Delete</button>
+            </form>       
+        <% }) %>
+</div>
+

@@ -98,23 +98,52 @@ router.post("/auth/signup", (request, response) => {
 
 
   
+/*
+  router.get("/homepage/favorite/:id", (request, response) => {
+    Book.findById(request.params.id)
+    .then(book => {
+      response.render("homepage/favorite", {book, moment})
 
+    }).catch(err => {
+      console.log(err)
+    })
+    
+  })
+*/
   // directing me to another page called favorite which means 
   // the user add this book to his favorite books list
-  router.get("/homepage/favorite/:id", (request, response) => {
-    User.findByIdAndUpdate(request.user._id, {$push: {favoriteBooks: request.params.id}})
-    response.redirect("/homepage/favorite")
-   
+  router.get("/homepage/bookfav/:id", (request, response) => {
+    console.log("user" + request.user._id);
+    console.log("book" + request.params.id);
+    User.findByIdAndUpdate(request.user._id, { $push: { favoriteBooks: request.params.id}})
+    User.findById(request.user._id, "favoriteBooks").populate("favoriteBooks")
+    .then( book => {
+      let books = book.favoriteBooks
+      response.render("homepage/bookfav", { books, moment })
+    }).catch(err => {
+      console.log(err)
+    })
   })
 
+
+
+  
    // directing me to another page called readlist page which means 
   //  the user already read that book 
+  /*
   router.get("/homepage/readlist/:id", (request, response) => {
-    User.findByIdAndUpdate(request.user._id, {$push: {finishReading: request.params.id}})
-    response.redirect("homepage/readlist")
+    User.findByIdAndUpdate(request.user._id, {$push: {finishReading: request.user._id}})
+    User.findById(request.user._id, "finishReading").populate("finishReading")
+    .then( booklist => {
+      console.log(booklist)
+      let readlist = booklist.finishReading
+      response.render("homepage/readlist", { readlist, moment })
+    }).catch(err => {
+      console.log(err)
+    })
    
   })
-
+*/
 
 router.get("/category", (request, response) => {
   Category.find()

@@ -1,10 +1,40 @@
-<div class="card signin">
+<div class="container">
+    <h5>BOOK CATEGORIES</h5>
+    <p>BIG BOSS you can add, update and delete category &hearts; </p>
+    <div class="row">
+        <div class="col">
+                <img src="/imgs/bg5.jpg" height="80px" class="card-img-top" alt="computer">
+                        <br>
+                        <form method="POST" action="/addcategory">
+                            <label>Category Name</label>
+                            <br>
+                            <input type="text" name="name" class="form-input">
+                            <br>
+                            <button class="btn" type="submit">Add Category</button>
+                        </form>
+        </div>
+        <div class="col">
+            <div> All Categories </div>
+            <br>
+            <% categories.forEach(function(category) { %>
+            <form class="inline" method="POST" action="/category/<%= category._id %>?_method=PUT">
+                <input type="text" name="name" value="<%= category.name %>" />
+                <button class="btn btn-info" type="submit">Update</button>
+            </form>
+            <form class="inline" method="POST" action="/category/<%= category._id %>/delete?_method=DELETE">
+                <button class="btn btn-info" type="submit">Delete</button>
+            </form>
+            <br><br>
+            <% }) %>   
+        </div>
+    </div>
+</div>
+<!-- <div class="card signin">
     <img src="/imgs/bg5.jpg" class="card-img-top" alt="computer">
     <div class="card-body">
         <h5 class="card-title">ADD CATEGORY</h5>
         <p class="card-text">BIG BOSS add new category &hearts; </p>
-        <!-- Add Category form -->
-        <div class="col-12 mx-auto">
+        <!-- <div class="col-12 mx-auto">
             <br>
             <form method="POST" action="/addcategory">
             <div class="row mb-3">
@@ -14,7 +44,7 @@
                 </div>
             </div>
             <br>
-                <button class="btn btn-primary" type="submit">Add Category</button>
+                <button class="btn" type="submit">Add Category</button>
             </form>
         </div>
     </div>
@@ -31,5 +61,5 @@
                 <button type="submit">Delete</button>
             </form>       
         <% }) %>
-</div>
+</div> -->
 

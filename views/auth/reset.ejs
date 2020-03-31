@@ -1,6 +1,6 @@
 <div class="container">
     <div class="col-12 mx-auto">
-         <form action="/auth/change" method="POST">
+         <form action="/auth/change" method="PUT">
              <div class="row">
                  <div class="col-12">
                      <label>Current Password</label>
@@ -15,10 +15,13 @@
                 </div>
             </div>
             <br>
-             
-           
-             <button class="btn btn-primary">Change</button>
-             
-         </form>
+            
+        </form>
+         <div class="resetBtn">
+            <a  href="/auth/messageReset" type="submit" name="something" class="btn btn-info" role="button" value="something">CHANGE PASSWORD </a>
+        </div>
+        <br>
+    
     </div>
  </div>
+ 

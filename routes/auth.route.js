@@ -1,6 +1,7 @@
 const router = require("express").Router();
 const passport = require("../config/passportConfig");
 const isLoggedIn = require("../config/loginBlocker");
+const moment = require("moment");
 const User = require("../models/user.model");
 const Category = require("../models/category.model");
 const Book = require("../models/book.model");
@@ -8,8 +9,15 @@ var formidable = require('formidable');
 const methodOverride = require("method-override");
 var fs = require('fs');
 
+<<<<<<< HEAD
 router.use(methodOverride("_method"));
 
+||||||| 0ec8877
+=======
+
+
+
+>>>>>>> aef4561a207d694fc218a47e159d1c32e4b7281c
 router.get("/landingpage", (request, response) => {
     response.render("landingpage")
 })
@@ -19,55 +27,11 @@ router.get("/auth/signup", (request, response) => {
 });
 
 
-
-
-// change password and user must be signed in to do
-router.post('/auth/change', (req, res) => {
-  const {password, password2 } = req.body;
-  let errors = [];
-
-  //check required fields
-  if (!password || !password2) {
-    errors.push({ msg: 'Please fill in all fields' });
-  }
-
-  //check passwords match
-  if (password !== password2) {
-    errors.push({ msg: 'Passwords do not match' });
-  }
-
-  //check pass length
-  if (password.length < 6) {
-    errors.push({ msg: 'Password should be at least 6 characters' });
-  }
-
-  if (errors.length > 0) {
-    res.render('update', {
-      errors,
-      password,
-      password2
-    })
-  }else {
-    //validation passed
-    User.updateOne({ password: password })
-      .then(user => {
-        if (user) {
-          //user exists
-         
-          res.render('update', {
-            password,
-            password2
-          });
-        } else {
-          const updateUser = new User({
-            password
-          });
-
-      }})}
-    })      
+router.get("/auth/aboutus", (request, response) => {
+  response.render("auth/aboutus");
+});
   
-  
-  router.post("/auth/signup", (request, response) => {
+router.post("/auth/signup", (request, response) => {
     let user = new User(request.body);
 
     user
@@ -86,22 +50,7 @@ router.post('/auth/change', (req, res) => {
   router.get("/auth/signin", (request, response) => {
     response.render("auth/signin");
   });
-  
-//   router.get("/dashboard", isLoggedIn, (request, response) => {
-//     if (request.user.isSenior) {
-//       //get current users list only
-//       User.findById(request.user._id, "list")
-//         .populate("list")
-//         .then(user => {
-//           let lists = user.list; //populated list in user model
-//           response.render("dashboard/index", { lists });
-//         });
-//     } else if (request.user.isHelper) {
-//       List.find({ status: "free" }).then(lists => {
-//         response.render("dashboard/index", { lists });
-//       });
-//     }
-//   });
+
   
   //-- Login Route
   router.post(
@@ -126,12 +75,50 @@ router.post('/auth/change', (req, res) => {
     response.render("auth/reset")
   })
 
+  // home page route which it will have all books avaliable
+  router.get("/homepage/index", (request, response) => {
+
+    Book.find()
+    .then(books => {
+        response.render("homepage/index", { books, moment })
+    })
+    .catch(err => {
+        console.log(err);
+    });
+  })
+  
   // homepage route which it will redirect to more information about the book page
-  router.get("/dashboard/moreInfo", (request, response) => {
-    response.render("homepage/information")
+  router.get("/homepage/information/:id", (request, response) => {
+
+    Book.findById(request.params.id)
+    .then(book => {
+        response.render("homepage/information", { book, moment })
+    })
+    .catch(err => {
+        console.log(err);
+    });
+
   })
 
-// ======================= Admin Pages =========================
+
+  
+
+  // directing me to another page called favorite which means 
+  // the user add this book to his favorite books list
+  router.get("/homepage/favorite/:id", (request, response) => {
+    User.findByIdAndUpdate(request.user._id, {$push: {favoriteBooks: request.params.id}})
+    response.redirect("/homepage/favorite")
+   
+  })
+
+   // directing me to another page called readlist page which means 
+  //  the user already read that book 
+  router.get("/homepage/readlist/:id", (request, response) => {
+    User.findByIdAndUpdate(request.user._id, {$push: {finishReading: request.params.id}})
+    response.redirect("homepage/readlist")
+   
+  })
+
 
 router.get("/category", (request, response) => {
   Category.find()
@@ -218,5 +205,33 @@ router.post("/addbook", (request, response) => {
   });
 });
 
+
+// update the password
+router.get("/auth/change", (request, response) => {
+  response.render("auth/change")
+})
+
+
+// updating the password 
+
+/*
+router.post("/auth/change", (request, response) => {
+  //let password = new User(request.body);
+  let user = new User(request.body);
+
+    user
+      .save()
+      .then(() => {
+        user.password = request.body.password2;
+        response.render("auth/messageReset")
+      })
+      .catch(err => {
+        console.log(err);
+      });
+})
+router.get("/auth/message", (request, response) => {
+  response.render("auth/messageReset")
+})
+*/
 
 module.exports = router;

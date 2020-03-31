@@ -8,6 +8,9 @@ const Book = require("../models/book.model");
 var formidable = require('formidable');
 var fs = require('fs');
 
+
+
+
 router.get("/landingpage", (request, response) => {
     response.render("landingpage")
 })
@@ -20,59 +23,8 @@ router.get("/auth/signup", (request, response) => {
 router.get("/auth/aboutus", (request, response) => {
   response.render("auth/aboutus");
 });
-
-
-
-
-
-
-// change password and user must be signed in to do
-router.post('/auth/change', (req, res) => {
-  const {password, password2 } = req.body;
-  let errors = [];
-
-  //check required fields
-  if (!password || !password2) {
-    errors.push({ msg: 'Please fill in all fields' });
-  }
-
-  //check passwords match
-  if (password !== password2) {
-    errors.push({ msg: 'Passwords do not match' });
-  }
-
-  //check pass length
-  if (password.length < 6) {
-    errors.push({ msg: 'Password should be at least 6 characters' });
-  }
-
-  if (errors.length > 0) {
-    res.render('update', {
-      errors,
-      password,
-      password2
-    })
-  }else {
-    //validation passed
-    User.updateOne({ password: password })
-      .then(user => {
-        if (user) {
-          //user exists
-         
-          res.render('update', {
-            password,
-            password2
-          });
-        } else {
-          const updateUser = new User({
-            password
-          });
-
-      }})}
-    })      
   
-  
-  router.post("/auth/signup", (request, response) => {
+router.post("/auth/signup", (request, response) => {
     let user = new User(request.body);
 
     user
@@ -127,8 +79,10 @@ router.post('/auth/change', (req, res) => {
         console.log(err);
     });
   })
+  
   // homepage route which it will redirect to more information about the book page
   router.get("/homepage/information/:id", (request, response) => {
+
     Book.findById(request.params.id)
     .then(book => {
         response.render("homepage/information", { book, moment })
@@ -139,16 +93,23 @@ router.post('/auth/change', (req, res) => {
 
   })
 
-  // directing me to another page called readlist page which means 
-  // the user already read that book
-  router.get("/homepage/readlist", (request, response) => {
-    response.render("homepage/readlist")
-  })
+
+  
 
   // directing me to another page called favorite which means 
   // the user add this book to his favorite books list
-  router.get("/homepage/favorite", (request, response) => {
-    response.render("homepage/favorite")
+  router.get("/homepage/favorite/:id", (request, response) => {
+    User.findByIdAndUpdate(request.user._id, {$push: {favoriteBooks: request.params.id}})
+    response.redirect("/homepage/favorite")
+   
+  })
+
+   // directing me to another page called readlist page which means 
+  //  the user already read that book 
+  router.get("/homepage/readlist/:id", (request, response) => {
+    User.findByIdAndUpdate(request.user._id, {$push: {finishReading: request.params.id}})
+    response.redirect("homepage/readlist")
+   
   })
 
 
@@ -214,5 +175,33 @@ router.post("/addbook", (request, response) => {
   });
 });
 
+
+// update the password
+router.get("/auth/change", (request, response) => {
+  response.render("auth/change")
+})
+
+
+// updating the password 
+
+/*
+router.post("/auth/change", (request, response) => {
+  //let password = new User(request.body);
+  let user = new User(request.body);
+
+    user
+      .save()
+      .then(() => {
+        user.password = request.body.password2;
+        response.render("auth/messageReset")
+      })
+      .catch(err => {
+        console.log(err);
+      });
+})
+router.get("/auth/message", (request, response) => {
+  response.render("auth/messageReset")
+})
+*/
 
 module.exports = router;

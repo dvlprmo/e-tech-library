@@ -1,24 +1,21 @@
-
-
 <div class="containerABC">
     
-      <% books.forEach(book =>{ %>
-      <div class="col-4">
-        <div class="box">
-          <div class="box-body">
-            <h6 class="col-sm box-subtitle mb-2 text-muted"><%= book.title %></h6>
-            <p class="box-text">
-              <img src="<%= book.image%>" alt="BookImage" style="width: 90px; height: 90px;"/></div>
-            </p>
-            
-              <div class="moreInfo">
-                <a  href="/homepage/information/<%= book._id %>" type="submit" name="moreInfo" class="btn btn-info signBut1" role="button" value="moreInfo">MORE INFORMATION ... </a>
-              </div>
-                
-            
+  <% books.forEach(book =>{ %>
+  <div class="col-4">
+    <div class="box">
+      <div class="box-body">
+        <h6 class="col-sm box-subtitle mb-2 text-muted"> <%= book.title %></h6>
+        <p class="box-text">
+          <img src="<%= book.image %>" alt="BookImage" style="width: 90px; height: 90px;"/></div>
+        </p>
+        
+          <div class="moreInfo">
+            <a  href="/homepage/information/<%= book._id %>" type="submit" name="moreInfo" class="btn btn-info signBut1" role="button" value="moreInfo">MORE INFORMATION ... </a>
           </div>
-        </div>
-      
-      <% }) %>
+
+      </div>
     </div>
- 
+  
+  <% }) %>
+</div>
+

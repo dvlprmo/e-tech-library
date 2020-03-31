@@ -20,12 +20,13 @@
     </div>
 
     <div class="buttonReview">
-    <form action="/homepage/readlist" method="POST">
-        <a  href="./homepage/readlist" type="submit" name="readlist" class="btn btn-info signBut5" role="button" value="readlist">ALREADY READ? </a>
-    </form>
-    <form action="/homepage/favorite" method="POST">
-                <a  href="./homepage/favorite" type="submit" name="favorite" class="btn btn-info signBut5" role="button" value="moreInfo">ADD TO FAVORITE LIST </a>
-            </form>
+    
+        <a  href="/homepage/readlist/<%= book._id %>" type="submit" name="readlist" class="btn btn-info signBut5" role="button" value="readlist">ALREADY READ? </a>
+   
+    
+        <div class="moreInfo">
+            <a  href="/homepage/favorite/<%= book._id %>" type="submit" name="moreInfo" class="btn btn-info signBut1" role="button" value="moreInfo">ADD TO FAVORITE LIST</a>
+          </div>
         </div>
   </div>
 </form>

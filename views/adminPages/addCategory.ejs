@@ -1,10 +1,10 @@
 <div class="container">
-    <h5>BOOK CATEGORIES</h5>
+    <h5 class="textColor">BOOK CATEGORIES</h5>
     <p>BIG BOSS you can add, update and delete category &hearts; </p>
     <div class="row">
         <div class="col">
-                <img src="/imgs/bg5.jpg" height="80px" class="card-img-top" alt="computer">
-                        <br>
+                <img src="/imgs/bg8.jpg" class="card-img-top" alt="computer">
+                        <br><br>
                         <form method="POST" action="/addcategory">
                             <label>Category Name</label>
                             <br>
@@ -14,7 +14,7 @@
                         </form>
         </div>
         <div class="col">
-            <div> All Categories </div>
+            <div class="textColor"> All Categories </div>
             <br>
             <% categories.forEach(function(category) { %>
             <form class="inline" method="POST" action="/category/<%= category._id %>?_method=PUT">

@@ -54,16 +54,24 @@
                   <a class="nav-link" href="#">ABOUT US</a>
                 </li>
                 <% if(currentUser) {%>
-                <li class="nav-item">
-                  <a class="nav-link" href="/auth/reset">CHANGE PASSWORD</a>
-                </li>
+                  <li class="nav-item">
+                    <a class="nav-link" href="/auth/reset">CHANGE PASSWORD</a>
+                  </li>
+                  <% if(currentUser.isAdmin) {%>
+                  <li class="nav-item">
+                    <a class="nav-link" href="/category">ADD CATEGORY</a>
+                  </li>
+                  <li class="nav-item">
+                    <a class="nav-link" href="/addbook">ADD BOOK</a>
+                  </li>
+                  <%} %>
                 <%} %>
               </ul>
             </div>
           </nav>
     </header>
 
-    <!-- <% if(alerts.success){ %> <% alerts.success.forEach(function(msg){ %>
+    <% if(alerts.success){ %> <% alerts.success.forEach(function(msg){ %>
       <div class="alert alert-success">
         <%= msg %>
       </div>
@@ -77,7 +85,7 @@
       <div class="alert alert-danger">
         Your <%= msg.param %> has <%= msg.msg %>
       </div>
-      <% }); %> <% } %> -->
+      <% }); %> <% } %>
       
     <%- body %>
 

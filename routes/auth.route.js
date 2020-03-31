@@ -112,19 +112,81 @@ router.post("/auth/signup", (request, response) => {
 */
   // directing me to another page called favorite which means 
   // the user add this book to his favorite books list
+<<<<<<< HEAD
   router.get("/homepage/bookfav/:id", (request, response) => {
     console.log("user" + request.user._id);
     console.log("book" + request.params.id);
     User.findByIdAndUpdate(request.user._id, { $push: { favoriteBooks: request.params.id}})
+||||||| b00ed82
+  router.get("/homepage/bookfav/:id", (request, response) => {
+    
+    User.findByIdAndUpdate(request.user._id, {$push: {favoriteBooks: request.params.id}})
+=======
+
+  /*
+  router.get("/homepage/bookfav", (request, response) => {
+    
+    User.findByIdAndUpdate(request.user._id, {$push: {favoriteBooks: request.params.id}})
+>>>>>>> be4ec4bec11b261f7f8f4746d362606bb1450b46
     User.findById(request.user._id, "favoriteBooks").populate("favoriteBooks")
     .then( book => {
+<<<<<<< HEAD
+||||||| b00ed82
+      console.log(book)
+=======
+      // console.log(book)
+>>>>>>> be4ec4bec11b261f7f8f4746d362606bb1450b46
       let books = book.favoriteBooks
-      response.render("homepage/bookfav", { books, moment })
+      response.render("homepage/bookfav", { books})
     }).catch(err => {
       console.log(err)
     })
   })
+*/
 
+router.get("/homepage/bookfav", (request, response) => {
+  
+  User.findById(request.user._id, "favoriteBooks").populate("favoriteBooks")
+  .then(book => {
+    let books = book.favoriteBooks
+    response.render("homepage/bookfav", { books})
+     
+  })
+  .catch(err => {
+      console.log(err);
+  });
+})
+
+  router.post("/homepage/favBook/:id", (request, response) => {
+    let favoriteBooks = request.params.id
+    console.log(favoriteBooks)
+    User.findByIdAndUpdate(request.user._id, {$push: {favoriteBooks: favoriteBooks}})
+    .then(() => {
+      response.redirect("/homepage/bookfav")
+    })
+  })
+
+  router.get("/homepage/readlist", (request, response) => {
+  
+     User.findById(request.user._id, "finishReading").populate("finishReading")
+    .then(book => {
+      let books = book.finishReading
+      response.render("homepage/readlist", { books })
+      
+    })
+    .catch(err => {
+        console.log(err);
+    });
+
+  })
+  router.post("/homepage/readlist/:id", (request, response) => {
+    let readBooks = request.params.id
+    
+    User.findByIdAndUpdate(request.user._id, {$push: {finishReading: readBooks}})
+    .then(() => {
+      response.redirect("/homepage/readlist")
+    })
+  })
 
 
   

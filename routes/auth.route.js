@@ -139,21 +139,43 @@ router.get("/homepage/bookfav", (request, response) => {
 
 // add new book to favorite list
   router.post("/homepage/favBook/:id", (request, response) => {
-    let favoriteBooks = request.params.id
-    console.log(favoriteBooks)
-    User.findByIdAndUpdate(request.user._id, {$push: {favoriteBooks: favoriteBooks}})
-    .then(() => {
+    let favBooks = request.params.id
+    
+    User.findById(request.user._id).then((res) => {
+      console.log(res)
+      const found = res.favoriteBooks.find(
+       element => element == favBooks 
+     )
+     console.log(found)
+     if(found != undefined){
+      request.flash("success", "Book Existed In The List");
+      response.redirect("/homepage/index");
+     }else {
+      User.findByIdAndUpdate(request.user._id, {$push: {favoriteBooks: favBooks}})
+      .then(() => {
       response.redirect("/homepage/bookfav")
+     })
+
+     }
+
+    }).catch((err) => {
+      console.log(err)
+
     })
+   
   })
 
 // delete book from favorite book
 router.delete("/homepage/favbook/:id/delete", (request, response) => {
   let readBooks = request.params.id
+
   User.findByIdAndUpdate(request.user._id, {$pull: {favoriteBooks: readBooks}})
   .then(() => {
+    console.log(request.params.id);
     request.flash("success", "Book Deleted From Favorite List Successfully");
     response.redirect("/homepage/index");
+  }).catch((err) => {
+    console.log(err)
   })
 })
 
@@ -174,13 +196,31 @@ router.delete("/homepage/favbook/:id/delete", (request, response) => {
 
   // add new book to finish reading list
   router.post("/homepage/readlist/:id", (request, response) => {
-    let readBooks = request.params.id
+    let readlist = request.params.id
     
-    User.findByIdAndUpdate(request.user._id, {$push: {finishReading: readBooks}})
-    .then(() => {
+    User.findById(request.user._id).then((res) => {
+      console.log(res)
+      const foundlist = res.finishReading.find(
+       element => element == readlist 
+     )
+     //console.log(found)
+     if(foundlist != undefined){
+      request.flash("success", "Book Existed In The List");
+      response.redirect("/homepage/index");
+     }else {
+      User.findByIdAndUpdate(request.user._id, {$push: {finishReading: readlist}})
+      .then(() => {
       response.redirect("/homepage/readlist")
+     })
+
+     }
+
+    }).catch((err) => {
+      console.log(err)
+
     })
   })
+
 
   // delete book from readlist book route
 router.delete("/homepage/readlist/:id/delete", (request, response) => {

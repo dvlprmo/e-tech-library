@@ -41,14 +41,14 @@
           </div>
         </form>
         <!-- if user signed in and admin -->
-        <hr>
-        <div class="center">
-          <br>
-        <h5 class="textColor">ADD AND UPDATE BOOK</h5>
-        <br>
-          <p>Hey, BIG BOSS you cand upadete and delete book..</p>
-          <br>
           <% if(currentUser.isAdmin) {%>
+              <hr>
+              <div class="center">
+                <br>
+                <h5 class="textColor">ADD AND UPDATE BOOK</h5>
+                <br>
+                <p>Hey, BIG BOSS you cand upadete and delete book..</p>
+                <br>
               <form class="inline" method="POST" action="/book/<%= book._id %>/delete?_method=DELETE">
                 <button class="btn btn-info" type="submit">Delete</button>
               </form>

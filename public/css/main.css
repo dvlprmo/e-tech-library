@@ -61,9 +61,9 @@ body {
 }
 .containerABC{
   display: grid;
-  grid-template-columns: 1fr 1fr 1fr 1fr;
+  grid-template-columns: 1fr 1fr 1fr;
   padding-top: 20px;
-  margin-left: 60px;
+  margin: 20px 50px;
   gap: 5px;
 }
 .signBut5{
@@ -105,8 +105,8 @@ body {
 }
 .box{
   text-align: center;
-  width: 220px;
-  height: 200px;
+  width: inherit;
+  height: inherit;
   margin-bottom: 50px;
 }
 .moreInfo{

@@ -318,7 +318,6 @@ router.delete("/book/:id/delete", (request, response) => {
 
 // update book
 router.get("/book/update/:id", (request, response) => {
-
   Book.findById(request.params.id)
     .then(book => {
       response.render("adminPages/updateBook", { book, moment })

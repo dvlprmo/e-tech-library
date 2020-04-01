@@ -32,6 +32,7 @@ body {
   padding: 20px 0;
   margin: 0;
 }
+
 .center {
   text-align: center;
   margin: auto;
@@ -169,13 +170,22 @@ adding a small thing in here of styling the text of no books
 }
 
 .signBut1 {
-  size: 80px;
   text-align: center;
   display: inline;
   text-decoration: none;
   text-align: center;
   border-radius: 20px;
 } 
+
+.signBut2 {
+   width: 90%;
+  text-align: center;
+  /* display: inline; */
+  text-decoration: none;
+  text-align: center;
+  border-radius: 20px;
+  background-color: #ed553b !important;
+}
 
 .btn-info {
   background-color: #22bb9c !important;
@@ -287,6 +297,12 @@ display: table;
   width: 50rem !important; 
   margin: 30px auto !important;
 }
+
+.bookDetails {
+  width: 40rem !important; 
+  margin: 30px auto !important;
+}
+
 
 .card-title, .card-text{
   text-align: center !important;

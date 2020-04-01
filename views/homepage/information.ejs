@@ -12,12 +12,12 @@
       <p class="textNum"> <span class="textColor">Page Numbers:</span> <%= book.numberOfPage%></p>
       <br>
       <!-- if user not signed in -->
-      <% if(!currentUser) {%>
-        <div class="center">
-          <a href="<%= book.link%>" name="read" class="btn signBut2" role="button" value="READ">READ
-          </a>
-          <br><br>
-        </div>
+      <div class="center">
+        <a href="<%= book.link%>" name="read" class="btn signBut2" role="button" value="READ">READ
+        </a>
+        <br><br>
+      </div>
+      <% if(!currentUser) {%> 
         <div class="center">
           <form action="/notSignedin" method="GET">
             <button type="submit" name="moreInfo" class="fa fa-check btn btn-info signBut5" role="button" value="moreInfo">
@@ -30,11 +30,6 @@
       <%} %>
       <!-- if user signed in -->
       <% if(currentUser) {%>
-        <div class="center">
-          <a href="<%= book.link%>" name="read" class="btn signBut2" role="button" value="READ">READ
-          </a>
-          <br><br>
-        </div>
       <div class="buttonReview center">
         <form action="/homepage/readlist/<%= book._id %>" method="POST">
           <button type="submit" name="moreInfo" class="fa fa-check btn btn-info signBut5" role="button" value="moreInfo"> ALREADY

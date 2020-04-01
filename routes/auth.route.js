@@ -30,6 +30,11 @@ router.get("/auth/signup", (request, response) => {
 router.get("/auth/aboutus", (request, response) => {
   response.render("auth/aboutus");
 });
+
+router.get("/notSignedin", (request, response) => {
+  request.flash("error", "You must be Signed-in/Signed-up");
+  response.redirect("/auth/signup");
+});
   
 router.post("/auth/signup", (request, response) => {
     let user = new User(request.body);
@@ -248,8 +253,6 @@ router.delete("/category/:id/delete", (request, response) => {
     response.redirect("/category");
   });
 });
-
-
 
 // update category
 router.put('/category/:id', (req, res) => {

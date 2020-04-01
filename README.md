@@ -1,90 +1,51 @@
-# ![GA Logo](https://ga-dash.s3.amazonaws.com/production/assets/logo-9f88ae6c9c3871690e33280fcf557f33.png) 
+# Tech Book Lounge
 
-# Project #2: Full Stack Application
-
-## Overview:
-
-You will be creating a full stack application using NodeJS and NoSQL.
-
----
-
-## What You've Learned
-
-By the time you submit this project, you will have covered new ground in, and reviewed, many of the big themes of the course so far:
-
-- **Command Line**: Practice interacting with the computer and navigating the filesystem from the command line.
-- **Source Control**: Manage and interact with a git repository to store changes to code.
-- **Programming Fundamentals**: Work with objects, constructors, events, while learning how to strategically solve problems and resolve errors.
-- **Web Fundamentals**: Learn how communication happens over the internet, and how to structure, style, and animate documents within a browser. Also learn how to respond to actions your users take and the data they input into the browser.
-- **Browser Applications**: Dive into CSS, and figure out how to use libraries and frameworks to get lots of style and functionality for free.
-- **Deployment**: Host a static web site in a managed hosting environment.
-- **Responsive Web Design**: Making web applications that respond to device size.
-- **Server Side Applications**: Server-side scripting is a technique used in web development which involves employing scripts on a web server which produce a response customized for each user's (client's) request to the website.
-- **Databases**: A structured set of data held in a computer, especially one that is accessible in various ways.
-- **NoSQL**: "not only SQL," database provides a mechanism for storage and retrieval of data, an alternative to traditional relational databases in which data is placed in tables. Data schema is carefully designed before the database is built.
-- **JavaScript**: JavaScript programming fundamentals including Object Oriented Programming with Classes and Inheritance.
-- **NodeJS and Express**: A web-application framework that includes everything needed to create database-backed web applications according to the Model-View-Controller (MVC) pattern.
-- **Mongodb**: A cross-platform document-oriented database program. Classified as a NoSQL database program, MongoDB uses JSON-like documents with schema.
-- **Mongoose**: Provides a schema-based solution for object modeling with Node.js to model your Mongodb data.
----
+## Project Description
+It is the first  E-library for technical and computer science books in the Middle East. It allows users to find many books in one location. We aim to make books easier to find and provide a simple and enjoyable experience for the user. Someday, we will be the biggest E-library.
 
 ## Requirements
+Build a web app using Express.
+Use Mongo DB as a backend.
+Styling web pages using Bootstrap.
+Use Trello for group tasks management.
+Use Github for group coding.
+Wireframes.
+ERD for DB.
+Authentication: sign in, sign up, sign out and change password.
+Admin can add, delete and edit books.
+User can viewbooks, add the book to favorite list or finish reading list.
 
-### General Requirements
-
-- Build a web application from scratch, must be your own work.
-- Use Express framework to build your application
-- Deploy on Heroku so application is live on the web [here](https://devcenter.heroku.com/articles/deploying-nodejs)
-- Create a `README.md` file that explains your app to the world
-
-### Technical Requirements
-
-#### Authentication
-- User must be able to sign up
-- User must be able to sign in
-- User must be able to change password
-- User must be able to sign out
-
-#### 2 extra resources of your choice (other than User)
-- User must be able to create a resource
-- User must be able to edit a resource
-- User must be able to view all resources they created
-- User must be able to view a single resource they created
-- User must not be able to edit or delete other users' resources
-
-#### Stretch Technical Goals (optional)
-
-- Make application responsive
-- Allow users to upload image files 
-- Use a CSS library like [Bootstrap](https://www.npmjs.com/package/bootstrap)
-
-### Team Requirements
-
-- Every team member must have commits contributing to the project.  
-- Pair programming is allowed and should be noted in the commit by using `@github_username` of each student pairing
-- No single student should do a majority of the commits.
+## Wireframes
+Omega E-library includes 9 pages: landing, sign up, sign in, books, book details, favorite books list, finished read list, add books and about us.
+- sign in
+![sign in](public/imgs/signin.png)
+- sign up
+![sign up](public/imgs/signup.png)
+- Landing Page
+![Landing Page](public/imgs/landing.png)
+- Books Page
+![Books Page](public/imgs/Books.png)
+- Books Details
+![Books Page](public/imgs/bookDetails.png)
+- Favorite List Page
+![Favorite List Page](public/imgs/Favoritelist.png)
+- Finished Reading List Page
+![Finished Reading List](public/imgs/Finishedreadinglist.png)
 
 
+## Design Database Models (ERD)
 
 
-### Necessary Deliverables
-- Projects are due on Thursday, 2nd of April, 2020 at 9.00am!
-- You have to fill the [google sheet] with you name, github link and deployed link.
-- A **10 minute presentation** in which you answer the following questions:
-  - What is the application about?
-  - Is there any information you think might help us understand what you built?
-  - Demo of application
-  - What features did you include?
-    - Make sure to explain anything "new" (things that we didn't cover in class)
-  - What was the most difficult part of the project?
-  - What was your favorite part to work on?
-  - What would you like to add next?
+## Difficulties in the Project
+- Working with array in MongoDB
+- Working with different developer levels
 
----
+## Favorite part of the Project
+- Using Bootstrap for designing
+- Working as back-end developer.
 
-## Useful Resources
+## Upgrade in the Future
+- Rate and review 
+- Search for book
 
-- **[Git Team Workflow](https://www.atlassian.com/git/tutorials/comparing-workflows)**
-- **[Git Team Cheatsheet](https://jameschambers.co/writing/git-team-workflow-cheatsheet/)**
-- **[nodeJS Example projects](https://github.com/sqreen/awesome-nodejs-projects)**
-- **[MongooseJS documentation](https://mongoosejs.com/docs/index.html)**
+## link to Tech Book Lounge

@@ -8,6 +8,7 @@ const Book = require("../models/book.model");
 var formidable = require('formidable');
 const methodOverride = require("method-override");
 var fs = require('fs');
+const bcrypt = require("bcrypt");
 
 router.use(methodOverride("_method"));
 
@@ -62,14 +63,8 @@ router.post("/auth/signup", (request, response) => {
   //--- Logout Route
   router.get("/auth/logout", (request, response) => {
     request.logout(); //clear and break session
-    request.flash("success", "Dont leave please come back!");
     response.redirect("/auth/signin");
   });
-
-  // render the reset page
-  router.get("/auth/reset", (request, response) => {
-    response.render("auth/reset")
-  })
 
   // home page route which it will have all books avaliable
   router.get("/homepage/index", (request, response) => {
@@ -127,7 +122,8 @@ router.post("/auth/signup", (request, response) => {
     })
   })
 */
-
+// =============================== favorite List =========================
+// get favorite list page
 router.get("/homepage/bookfav", (request, response) => {
   
   User.findById(request.user._id, "favoriteBooks").populate("favoriteBooks")
@@ -141,6 +137,7 @@ router.get("/homepage/bookfav", (request, response) => {
   });
 })
 
+// add new book to favorite list
   router.post("/homepage/favBook/:id", (request, response) => {
     let favoriteBooks = request.params.id
     console.log(favoriteBooks)
@@ -150,6 +147,8 @@ router.get("/homepage/bookfav", (request, response) => {
     })
   })
 
+  // =============================== finish Reading List =========================
+  // get finish reading list page
   router.get("/homepage/readlist", (request, response) => {
   
      User.findById(request.user._id, "finishReading").populate("finishReading")
@@ -161,8 +160,9 @@ router.get("/homepage/bookfav", (request, response) => {
     .catch(err => {
         console.log(err);
     });
-
   })
+
+  // add new book to finish reading list
   router.post("/homepage/readlist/:id", (request, response) => {
     let readBooks = request.params.id
     
@@ -191,6 +191,8 @@ router.get("/homepage/bookfav", (request, response) => {
   })
 */
 
+// ======================= Category Page =========================
+// get add category page
 router.get("/category", (request, response) => {
   Category.find()
     .then(categories => {
@@ -201,8 +203,8 @@ router.get("/category", (request, response) => {
     });
 });
 
+// add category
 router.post("/addcategory", (request, response) => {
-
   let category = new Category(request.body);
   category
     .save()
@@ -216,6 +218,7 @@ router.post("/addcategory", (request, response) => {
         }
 );
 
+// delete category
 router.delete("/category/:id/delete", (request, response) => {
   Category.findByIdAndDelete(request.params.id).then(category => {
     request.flash("success", "Category Deleted Successfully");
@@ -223,17 +226,17 @@ router.delete("/category/:id/delete", (request, response) => {
   });
 });
 
+// update category
 router.put('/category/:id', (req, res) => {
-  console.log(req.body);
-  console.log(req.params.id);
   Category.findByIdAndUpdate(req.params.id, req.body, (err, updatedModel) => {
-    request.flash("success", "Category updated Successfully");
+    req.flash("success", "Category updated Successfully");
     res.redirect('/category');
   });
 });
 
+// ======================= Add Book Page =========================
+// get add book page
 router.get("/addbook", (request, response) => {
-
   Category.find()
       .then(categories => {
         response.render("adminPages/addbook", { categories })
@@ -243,6 +246,7 @@ router.get("/addbook", (request, response) => {
       });
 });
 
+// add book
 router.post("/addbook", (request, response) => {
   var form = new formidable.IncomingForm();
   form.parse(request, function (err, fields, files) {
@@ -263,7 +267,7 @@ router.post("/addbook", (request, response) => {
               category.book.push(book);
               category.save();
               });
-              // I SHOULD ADD THE USER TOO
+
             request.flash("success", "New Book added Successfully");
             response.redirect("/addbook");
           })
@@ -276,11 +280,58 @@ router.post("/addbook", (request, response) => {
   });
 });
 
+// delete book
+router.delete("/book/:id/delete", (request, response) => {
+  Book.findByIdAndDelete(request.params.id).then(book => {
+    request.flash("success", "Book Deleted Successfully");
+    response.redirect("/homepage/index");
+  });
+});
 
-// update the password
-router.get("/auth/change", (request, response) => {
-  response.render("auth/change")
+// update book
+router.get("/book/update/:id", (request, response) => {
+
+  Book.findById(request.params.id)
+    .then(book => {
+      response.render("adminPages/updateBook", { book, moment })
+    })
+    .catch(err => {
+      console.log(err);
+    });
 })
+
+router.post('/updatebook/:id', (req, res) => {
+  Book.findByIdAndUpdate(req.params.id, req.body, (err, updatedModel) => {
+    req.flash("success", "Book updated Successfully");
+    res.redirect('/homepage/index');
+  });
+});
+
+// ======================== Change Password =========================
+// render the reset page
+router.get("/auth/reset", (request, response) => {
+  response.render("auth/reset")
+})
+
+// Change password
+router.post("/auth/change", (req, res) => {
+  // check if password and confirm password match
+  if (req.body.password == req.body.confirmPassword){
+    let newPass = req.body.password;
+    // encrypt pass
+    var hashedPass = bcrypt.hashSync(newPass, 10);
+    // find the user and update password
+    User.findByIdAndUpdate(req.user._id, {password: hashedPass}, (err, updatedModel) => {
+      req.flash("success", "Password updated Successfully");
+      res.redirect('/landingpage');
+    });
+  }
+  // if passwords do not match
+  else{
+    req.flash("error", "password and confirm password do not match");
+    res.redirect('/auth/reset');
+  }
+});
 
 
 // updating the password 

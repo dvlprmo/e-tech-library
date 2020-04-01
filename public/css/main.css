@@ -294,6 +294,36 @@ footer {
   padding: 20px 0;
 }
 
+/* Category */
+
+.textColor {
+  color: #ed553b;
+}
+.container {
+  max-width: 100% !important;
+  text-align: center;
+}
+
+.col {
+  margin: 20px !important;
+  border: solid 1px rgba(0, 0, 0, 0.125);
+  border-radius: 5px;
+  padding: 20px;
+}
+
+.btn {
+  color: white !important;
+}
+
+.inline {
+  display: inline;
+}
+
+/* alert */
+.alert {
+  margin-bottom: 0 !important;
+}
+
 [class^="col-"] {
   position: relative;
   width: 100%;

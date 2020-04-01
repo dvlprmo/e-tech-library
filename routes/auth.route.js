@@ -150,6 +150,16 @@ router.get("/homepage/bookfav", (request, response) => {
     })
   })
 
+// delete book from favorite book
+router.delete("/homepage/favbook/:id/delete", (request, response) => {
+  let readBooks = request.params.id
+  User.findByIdAndUpdate(request.user._id, {$pull: {favoriteBooks: readBooks}})
+  .then(() => {
+    request.flash("success", "Book Deleted From Favorite List Successfully");
+    response.redirect("/homepage/index");
+  })
+})
+
   // =============================== finish Reading List =========================
   // get finish reading list page
   router.get("/homepage/readlist", (request, response) => {
@@ -174,6 +184,16 @@ router.get("/homepage/bookfav", (request, response) => {
       response.redirect("/homepage/readlist")
     })
   })
+
+  // delete book from readlist book route
+router.delete("/homepage/readlist/:id/delete", (request, response) => {
+  let readBooks = request.params.id
+  User.findByIdAndUpdate(request.user._id, {$pull: {finishReading: readBooks}})
+  .then(() => {
+    request.flash("success", "Book Deleted From Read List Successfully");
+    response.redirect("/homepage/index");
+  })
+})
 
 
   
@@ -228,6 +248,8 @@ router.delete("/category/:id/delete", (request, response) => {
     response.redirect("/category");
   });
 });
+
+
 
 // update category
 router.put('/category/:id', (req, res) => {

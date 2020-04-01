@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet"
+      integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
+    <link rel="stylesheet" href="/css/bootstrap.min.css" />
+    <meta name=”viewport” content=”width=device-width, initial-scale=1.0">
+    <link rel=”stylesheet” href=”css/bootstrap-responsive.css”>
+    <link href="https://fonts.googleapis.com/css?family=Nunito|Open+Sans|PT+Sans&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/css/main.css">
+    <link rel="icon" href="/public/imgs/icon.jpeg">
+    <title>Tech Book Lounge</title>
+  </head>
+  <body>
+   
+    <header>
+        <!-- User Option Bar -->
+        <nav class="customNav">
+          <div class="welcomeUser">
+            Hello, 
+           <% if(currentUser) {%>
+             <%= currentUser.firstname %>
+            <%} %>
+            <% if(!currentUser) {%>
+            <a href="/auth/signin">Signin</a> |
+            <a href="/auth/signup">Signup</a>
+            <%} %>
+          </div>
+          <div class="optionContainer">
+            <% if(currentUser) {%>
+              <!-- <a href="/homepage/index" class="fa fa-book"></i>  -->
+              <a href="/homepage/favbook" class="fa fa-heart"></a>
+              <a href="/homepage/readlist" class="fa fa-check"></i>
+              
+              <a href="/auth/logout">Logout</a>
+            <%} %>
+          </div>     
+        </nav>
+
+         <!-- Website Title -->
+          <div class="headerTitle"> 
+              <img src="/imgs/logo2.png" alt="logo" height="80px" width="300px">
+          </div>
+        
+          <!-- Navigation -->
+          <nav class="navbar navbar-expand-lg navbar-dark bg-dark mb-4">
+            <div class="collapse navbar-collapse" id="navbarNavDropdown">
+              <ul class="navbar-nav">
+                <li class="nav-item">
+                  <a class="nav-link" href="/landingpage">HOME</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" href="/homepage/index">BOOKS</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" href="/auth/aboutus">ABOUT US</a>
+                </li>
+                <% if(currentUser) {%>
+                  <li class="nav-item">
+                    <a class="nav-link" href="/auth/reset">CHANGE PASSWORD</a>
+                  </li>
+                  <% if(currentUser.isAdmin) {%>
+                  <li class="nav-item">
+                    <a class="nav-link" href="/category">ADD CATEGORY</a>
+                  </li>
+                  <li class="nav-item">
+                    <a class="nav-link" href="/addbook">ADD BOOK</a>
+                  </li>
+                  <%} %>
+                <%} %>
+              </ul>
+            </div>
+          </nav>
+    </header>
+
+    <% if(alerts.success){ %> <% alerts.success.forEach(function(msg){ %>
+      <div class="alert alert-success">
+        <%= msg %>
+      </div>
+      <% }); %> <% } %> <% if(alerts.error){ %> <%
+      alerts.error.forEach(function(msg){ %>
+      <div class="alert alert-danger">
+        <%= msg %>
+      </div>
+      <% }); %> <% } %> <% if(alerts.autherror){ %> <%
+      alerts.autherror.forEach(function(msg){ %>
+      <div class="alert alert-danger">
+        Your <%= msg.param %> has <%= msg.msg %>
+      </div>
+      <% }); %> <% } %>
+      
+    <%- body %>
+
+    <footer>
+       <p>&copy; Made with <span style="color: #ed553b;">&hearts;</span> by Omega Team.</p>
+    </footer>
+    <script src="js/jQuery.js"></script>
+    <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"
+      integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
+      integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+    <script src="/js/bootstrap.min.js"></script>
+    <script src="/js/main.js"></script>
+  </body>
+</html>

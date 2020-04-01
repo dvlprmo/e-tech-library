@@ -1,0 +1,66 @@
+
+<div class="card signin">
+  <img class="card-img-top signup-img" src="<%= book.image%>" alt="Book image" height="500px" width="200px"> 
+  <div class="card-body">
+    <h5 class="card-title"><%= book.title%></h5>
+    <br>
+    <p class="card-text">
+      <p class="textNum"> <span class="textColor">Title:</span> <%= book.title%></p>
+      <p class="textNum"> <span class="textColor">Description:</span> <%= book.description %></p>
+      <p class="textNum"> <span class="textColor">publisher:</span> <%= book.publisher%></p>
+      <p class="textNum"> <span class="textColor">ISBN:</span> <%= book.ISBN%></p>
+      <p class="textNum"> <span class="textColor">Page Numbers:</span> <%= book.numberOfPage%></p>
+      <br>
+      <!-- if user not signed in -->
+      <% if(!currentUser) {%>
+        <div class="center">
+          <a href="<%= book.link%>" name="read" class="btn signBut2" role="button" value="READ">READ
+          </a>
+          <br><br>
+        </div>
+        <div class="center">
+          <form action="/notSignedin" method="GET">
+            <button type="submit" name="moreInfo" class="fa fa-check btn btn-info signBut5" role="button" value="moreInfo">
+              ALREADY
+              READ?</button>
+            <button type="submit" name="moreInfo" class="fa fa-heart btn btn-info signBut1" role="button" value="moreInfo"> ADD TO
+              FAVORITE</button>
+          </form>
+        </div>
+      <%} %>
+      <!-- if user signed in -->
+      <% if(currentUser) {%>
+      <div class="buttonReview center">
+        <form action="/homepage/readlist/<%= book._id %>" method="POST">
+          <button type="submit" name="moreInfo" class="fa fa-check btn btn-info signBut5" role="button" value="moreInfo"> ALREADY
+            READ?</button>
+        </form>
+        <form action="/homepage/favBook/<%= book._id %>" method="POST">
+          <div class="moreInfo">
+            <button type="submit" name="moreInfo" class="fa fa-heart btn btn-info signBut1" role="button" value="moreInfo"> ADD TO FAVORITE</button>
+          </div>
+        </form>
+        <!-- if user signed in and admin -->
+          <% if(currentUser.isAdmin) {%>
+              <hr>
+              <div class="center">
+                <br>
+                <h5 class="textColor">ADD AND UPDATE BOOK</h5>
+                <br>
+                <p>Hey, BIG BOSS you cand upadete and delete book..</p>
+                <br>
+              <form class="inline" method="POST" action="/book/<%= book._id %>/delete?_method=DELETE">
+                <button class="btn btn-info" type="submit">Delete</button>
+              </form>
+              <form class="inline" method="GET" action="/book/update/<%= book._id %>">
+                  <button class="btn btn-info" type="submit">Update</button>
+              </form>
+          <%} %>
+          <%} %>
+        </div>
+  </div>
+</div>
+</div>
+
+
+  

@@ -1,0 +1,31 @@
+<div class="container">
+    <div class="col-6 mx-auto">
+        <h5 class="textColor">CHANGE PASSWORD</h5>
+        <div>
+            <% if(currentUser) {%>
+            <%= currentUser.firstname %>
+            <%} %>, Type your new password.
+        </div> <br><br>
+         <form action="/auth/change" method="POST">
+             <div class="row">
+                <div class="col-12">
+                    <label>New Password</label>
+                    <input type="password" class="form-control" name="password" />
+                </div>
+            </div>
+            <br>
+            <div class="row">
+                <div class="col-12">
+                    <label>Confirm New Password</label>
+                    <input type="password" class="form-control" name="confirmPassword" />
+                </div>
+            </div>
+            <br>
+            <button class="btn btn-info" type="submit">Update</button>
+        </form>
+            
+        <br>
+    
+    </div>
+ </div>
+ 

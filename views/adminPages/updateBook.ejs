@@ -1,0 +1,19 @@
+<div class="card signin">
+    <form method="POST" action="/updatebook/<%= book._id %>">
+    <img class="card-img-top signup-img" src="<%= book.image%>" alt="Book image" height="500px" width="200px">
+    <div class="card-body">
+        <h5 class="card-title"><%= book.title%></h5>
+        <br>
+        <div class="textOM">
+            <h4 class="textNum"> TITLE: <input type="text" name="title" value="<%= book.title%>"></h4>
+            <h4 class="textNum"> ADDED ON: <%= moment(book.createdAt).fromNow()%></h4>
+            <h4 class="textNum"> PUBLISHER: <input type="text" name="publisher" value="<%= book.publisher%>"></h4>
+            <h4 class="textNum"> ISBN: <input type="text" name="ISBN" value="<%= book.ISBN%>"></h4>
+            <h4 class="textNum"> PAGE NUMBERS: <input type="text" name="numberOfPage" value="<%= book.numberOfPage%>"></h4>
+            <h4 class="textNum"> LINK: <input type="text" name="link" value="<%= book.link%>"</h4>
+        </div>
+            <button class="btn btn-info" type="submit">Update</button>
+        </form>
+    </div>
+
+</div>

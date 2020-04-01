@@ -1,0 +1,21 @@
+
+  <div class="containerABC">
+    <% books.forEach(book => { %>
+        <div class="box">
+          <div class="box-body">
+            <h6 class="col-sm box-subtitle mb-2 text-muted"> <%= book.title %></h6>
+            <p class="box-text">
+              <img src="<%= book.image %>" alt="BookImage" style="width: 150px; height: 170px;"/></div>
+            </p>
+
+            <form class="inline" method="POST" action="/homepage/readlist/<%= book._id %>/delete?_method=DELETE">
+              <button class="btn btn-info signBut1" type="submit">Delete</button>
+          </form>
+          <br>
+          <a href="/homepage/information/<%= book._id %>" type="submit" name="moreInfo" class="btn btn-info signBut1"
+            role="button" value="moreInfo">More Details </a>
+            <br>
+    </div>
+      <% })%>
+    </div>
+  

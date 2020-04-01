@@ -124,7 +124,7 @@ router.post("/auth/signup", (request, response) => {
 */
 // =============================== favorite List =========================
 // get favorite list page
-router.get("/homepage/bookfav", (request, response) => {
+router.get("/homepage/favbook", (request, response) => {
   
   User.findById(request.user._id, "favoriteBooks").populate("favoriteBooks")
   .then(book => {
@@ -138,7 +138,7 @@ router.get("/homepage/bookfav", (request, response) => {
 })
 
 // add new book to favorite list
-  router.post("/homepage/favBook/:id", (request, response) => {
+  router.post("/homepage/favbook/:id", (request, response) => {
     let favBooks = request.params.id
     
     User.findById(request.user._id).then((res) => {
@@ -153,7 +153,7 @@ router.get("/homepage/bookfav", (request, response) => {
      }else {
       User.findByIdAndUpdate(request.user._id, {$push: {favoriteBooks: favBooks}})
       .then(() => {
-      response.redirect("/homepage/bookfav")
+      response.redirect("/homepage/favbook")
      })
 
      }
@@ -220,6 +220,7 @@ router.delete("/homepage/favbook/:id/delete", (request, response) => {
 
     })
   })
+
 
 
   // delete book from readlist book route

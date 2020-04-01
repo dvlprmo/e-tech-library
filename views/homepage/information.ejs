@@ -1,49 +1,66 @@
 
-<div class="boardBox">
-
-
-<div class="newNoneClass" style="width: 18rem;">
-    
-    <% //books.forEach(book =>{ %>
-      
-        <div class="alone">
-            <img class="imageOm" src="<%= book.image%>" alt="Card image cap">
+<div class="card signin">
+  <img class="card-img-top signup-img" src="<%= book.image%>" alt="Book image" height="500px" width="200px"> 
+  <div class="card-body">
+    <h5 class="card-title"><%= book.title%></h5>
+    <br>
+    <p class="card-text">
+      <p class="textNum"> <span class="textColor">Title:</span> <%= book.title%></p>
+      <p class="textNum"> <span class="textColor">Description:</span> <%= book.description %></p>
+      <p class="textNum"> <span class="textColor">publisher:</span> <%= book.publisher%></p>
+      <p class="textNum"> <span class="textColor">ISBN:</span> <%= book.ISBN%></p>
+      <p class="textNum"> <span class="textColor">Page Numbers:</span> <%= book.numberOfPage%></p>
+      <br>
+      <!-- if user not signed in -->
+      <% if(!currentUser) {%>
+        <div class="center">
+          <a href="<%= book.link%>" name="read" class="btn signBut2" role="button" value="READ">READ
+          </a>
+          <br><br>
         </div>
-   
-    <div class="textOM">
-      <h4 class="textNum"> TITLE: <%= book.title%> </h4>
-      <h4 class="textNum"> ADDED ON: <%= moment(book.createdAt).fromNow()%></h4>
-      <h4 class="textNum"> PUBLISHER: <%= book.publisher%></h4>
-      <h4 class="textNum"> ISBN: <%= book.ISBN%></h4>
-      <h4 class="textNum"> PAGE NUMBERS: <%= book.numberOfPage%></h4>
-      <h4 class="textNum"> LINK: <%= book.link%></h4>
-    </div>  
-    <% // }) %>
-    </div>
-
-    <div class="buttonReview">
-      <form action="/homepage/readlist/<%= book._id %>" method="POST">
-      <button type="submit" name="moreInfo" class="btn btn-info signBut5" role="button" value="moreInfo">ALREADY READ?</button>
-    </form>
-      <form action="/homepage/favBook/<%= book._id %>" method="POST">
-      <div class="moreInfo">
-        <button type="submit" name="moreInfo" class="btn btn-info signBut1" role="button" value="moreInfo">ADD TO FAVORITE LIST</button>
-      </div>
-    </form>
-    <% if(currentUser) {%>
-      <% if(currentUser.isAdmin) {%>
-    <form  method="POST" action="/book/<%= book._id %>/delete?_method=DELETE">
-      <button class="btn btn-info" type="submit">Delete</button>
-    </form>
-    <form method="GET" action="/book/update/<%= book._id %>">
-      <button class="btn btn-info" type="submit">Update</button>
-    </form>
-    <%} %>
-    <%} %>
-    </div>
-  
+        <div class="center">
+          <form action="/notSignedin" method="GET">
+            <button type="submit" name="moreInfo" class="fa fa-check btn btn-info signBut5" role="button" value="moreInfo">
+              ALREADY
+              READ?</button>
+            <button type="submit" name="moreInfo" class="fa fa-heart btn btn-info signBut1" role="button" value="moreInfo"> ADD TO
+              FAVORITE</button>
+          </form>
+        </div>
+      <%} %>
+      <!-- if user signed in -->
+      <% if(currentUser) {%>
+      <div class="buttonReview center">
+        <form action="/homepage/readlist/<%= book._id %>" method="POST">
+          <button type="submit" name="moreInfo" class="fa fa-check btn btn-info signBut5" role="button" value="moreInfo"> ALREADY
+            READ?</button>
+        </form>
+        <form action="/homepage/favBook/<%= book._id %>" method="POST">
+          <div class="moreInfo">
+            <button type="submit" name="moreInfo" class="fa fa-heart btn btn-info signBut1" role="button" value="moreInfo"> ADD TO FAVORITE</button>
+          </div>
+        </form>
+        <!-- if user signed in and admin -->
+          <% if(currentUser.isAdmin) {%>
+              <hr>
+              <div class="center">
+                <br>
+                <h5 class="textColor">ADD AND UPDATE BOOK</h5>
+                <br>
+                <p>Hey, BIG BOSS you cand upadete and delete book..</p>
+                <br>
+              <form class="inline" method="POST" action="/book/<%= book._id %>/delete?_method=DELETE">
+                <button class="btn btn-info" type="submit">Delete</button>
+              </form>
+              <form class="inline" method="GET" action="/book/update/<%= book._id %>">
+                  <button class="btn btn-info" type="submit">Update</button>
+              </form>
+          <%} %>
+          <%} %>
+        </div>
   </div>
-
 </div>
+</div>
+
 
   

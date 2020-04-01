@@ -14,6 +14,9 @@ router.use(methodOverride("_method"));
 
 
 
+router.get("/", (request, response) => {
+  response.render("landingpage")
+})
 
 router.get("/landingpage", (request, response) => {
     response.render("landingpage")

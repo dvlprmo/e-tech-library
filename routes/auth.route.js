@@ -14,6 +14,9 @@ router.use(methodOverride("_method"));
 
 
 
+router.get("/", (request, response) => {
+  response.render("landingpage")
+})
 
 router.get("/landingpage", (request, response) => {
     response.render("landingpage")
@@ -26,6 +29,11 @@ router.get("/auth/signup", (request, response) => {
 
 router.get("/auth/aboutus", (request, response) => {
   response.render("auth/aboutus");
+});
+
+router.get("/notSignedin", (request, response) => {
+  request.flash("error", "You must be Signed-in/Signed-up");
+  response.redirect("/auth/signup");
 });
   
 router.post("/auth/signup", (request, response) => {
@@ -287,8 +295,6 @@ router.delete("/category/:id/delete", (request, response) => {
   });
 });
 
-
-
 // update category
 router.put('/category/:id', (req, res) => {
   Category.findByIdAndUpdate(req.params.id, req.body, (err, updatedModel) => {
@@ -353,7 +359,6 @@ router.delete("/book/:id/delete", (request, response) => {
 
 // update book
 router.get("/book/update/:id", (request, response) => {
-
   Book.findById(request.params.id)
     .then(book => {
       response.render("adminPages/updateBook", { book, moment })

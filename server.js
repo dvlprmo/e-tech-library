@@ -8,6 +8,7 @@ const passport = require("./config/passportConfig");
 const expressLayouts = require("express-ejs-layouts");
 const authRoutes = require("./routes/auth.route");
 const MongoStore = require('connect-mongo')(session); 
+//
 
 // connecting database with the server
 mongoose.connect(

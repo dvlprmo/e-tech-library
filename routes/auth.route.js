@@ -177,6 +177,8 @@ router.get("/homepage/favbook", (request, response) => {
 router.delete("/homepage/favbook/:id/delete", (request, response) => {
   let readBooks = request.params.id
 
+
+  //
   User.findByIdAndUpdate(request.user._id, {$pull: {favoriteBooks: readBooks}})
   .then(() => {
     console.log(request.params.id);

@@ -101,35 +101,7 @@ router.post("/auth/signup", (request, response) => {
 
 
   
-/*
-  router.get("/homepage/favorite/:id", (request, response) => {
-    Book.findById(request.params.id)
-    .then(book => {
-      response.render("homepage/favorite", {book, moment})
 
-    }).catch(err => {
-      console.log(err)
-    })
-    
-  })
-*/
-  // directing me to another page called favorite which means 
-  // the user add this book to his favorite books list
-
-  /*
-  router.get("/homepage/bookfav", (request, response) => {
-    
-    User.findByIdAndUpdate(request.user._id, {$push: {favoriteBooks: request.params.id}})
-    User.findById(request.user._id, "favoriteBooks").populate("favoriteBooks")
-    .then( book => {
-      // console.log(book)
-      let books = book.favoriteBooks
-      response.render("homepage/bookfav", { books})
-    }).catch(err => {
-      console.log(err)
-    })
-  })
-*/
 // =============================== favorite List =========================
 // get favorite list page
 router.get("/homepage/favbook", (request, response) => {
@@ -247,21 +219,7 @@ router.delete("/homepage/readlist/:id/delete", (request, response) => {
   
    // directing me to another page called readlist page which means 
   //  the user already read that book 
-  /*
-  router.get("/homepage/readlist/:id", (request, response) => {
-    User.findByIdAndUpdate(request.user._id, {$push: {finishReading: request.user._id}})
-    User.findById(request.user._id, "finishReading").populate("finishReading")
-    .then( booklist => {
-      console.log(booklist)
-      let readlist = booklist.finishReading
-      response.render("homepage/readlist", { readlist, moment })
-    }).catch(err => {
-      console.log(err)
-    })
-   
-  })
-*/
-
+  
 // ======================= Category Page =========================
 // get add category page
 router.get("/category", (request, response) => {
@@ -403,27 +361,5 @@ router.post("/auth/change", (req, res) => {
   }
 });
 
-
-// updating the password 
-
-/*
-router.post("/auth/change", (request, response) => {
-  //let password = new User(request.body);
-  let user = new User(request.body);
-
-    user
-      .save()
-      .then(() => {
-        user.password = request.body.password2;
-        response.render("auth/messageReset")
-      })
-      .catch(err => {
-        console.log(err);
-      });
-})
-router.get("/auth/message", (request, response) => {
-  response.render("auth/messageReset")
-})
-*/
 
 module.exports = router;
